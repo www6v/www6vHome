@@ -1,0 +1,917 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Calibri","sans-serif";}
+h2
+	{mso-style-link:"标题 2 Char";
+	margin-top:13.0pt;
+	margin-right:0cm;
+	margin-bottom:13.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:173%;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:"Cambria","serif";}
+h3
+	{mso-style-link:"标题 3 Char";
+	margin-right:0cm;
+	margin-left:0cm;
+	font-size:13.5pt;
+	font-family:宋体;}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-link:"页眉 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	layout-grid-mode:char;
+	border:none;
+	padding:0cm;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-link:"页脚 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	layout-grid-mode:char;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"批注框文本 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:21.0pt;
+	font-size:10.5pt;
+	font-family:"Calibri","sans-serif";}
+span.3Char
+	{mso-style-name:"标题 3 Char";
+	mso-style-link:"标题 3";
+	font-family:宋体;
+	font-weight:bold;}
+span.Char
+	{mso-style-name:"批注框文本 Char";
+	mso-style-link:批注框文本;}
+span.2Char
+	{mso-style-name:"标题 2 Char";
+	mso-style-link:"标题 2";
+	font-family:"Cambria","serif";
+	font-weight:bold;}
+span.Char0
+	{mso-style-name:"页眉 Char";
+	mso-style-link:页眉;}
+span.Char1
+	{mso-style-name:"页脚 Char";
+	mso-style-link:页脚;}
+ /* Page Definitions */
+ @page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	layout-grid:15.6pt;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=ZH-CN link=blue vlink=purple style='text-justify-trim:punctuation'>
+
+<div class=Section1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:15.0pt'>CQRS </span><span
+style='font-size:15.0pt;font-family:宋体'>简介和案例分析</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US>CQRS</span><span
+style='font-family:宋体'>全称是指</span><span lang=EN-US>Command Query ResponsibilitySeparation.CQRS</span><span
+style='font-family:宋体'>的核心是一个简单的概念</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>使用一个模型来读信息</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>使用另一个模型来更新信息</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>它是</span><span lang=EN-US>CQS</span><span
+style='font-family:宋体'>原理在各个软件领域中的应用而产生的一种模式</span><span lang=EN-US>. CQRS</span><span
+style='font-family:宋体'>把整个系统分成两个部分</span><span lang=EN-US>: </span><span
+style='font-family:宋体'>命令部分和查询部分</span><span lang=EN-US>. Command</span><span
+style='font-family:宋体'>部分关注更新</span><span lang=EN-US>,&nbsp; Query</span><span
+style='font-family:宋体'>部分关注读取</span><span lang=EN-US>.&nbsp; </span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:15.75pt'><span style='font-family:宋体'>其实你可能早就接触过</span><span
+lang=EN-US>CQRS</span><span style='font-family:宋体'>相关的概念</span><span
+lang=EN-US>,</span><span style='font-family:宋体'>熟悉数据库的读者不会对索引陌生</span><span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US>Query</span><span
+style='font-family:宋体'>部分</span><span lang=EN-US>:</span><span
+style='font-family:宋体'>如果数据表有索引</span><span lang=EN-US>,&nbsp; </span><span
+style='font-family:宋体'>读数据表更加的快速</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US>Command</span><span
+style='font-family:宋体'>部分</span><span lang=EN-US>:</span><span
+style='font-family:宋体'>如果数据表有</span><span lang=EN-US>index,update</span><span
+style='font-family:宋体'>表时需要更新</span><span lang=EN-US>index, </span><span
+style='font-family:宋体'>所以</span><span lang=EN-US>update</span><span
+style='font-family:宋体'>更加的慢</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>本文主要从</span><span
+lang=EN-US>CQRS</span><span style='font-family:宋体'>在高伸缩性系统和领域驱动设计</span><span
+lang=EN-US>(DDD)</span><span style='font-family:宋体'>两方面的应用阐述其优势。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; CQRS</span><span
+style='font-family:宋体'>的出现有以下两种驱动力</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; 1. </span><span
+style='font-family:宋体'>多参与者协作的环境</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>多个参与者会使用和修改相同的数据集</span><span
+lang=EN-US>.&nbsp; </span><span style='font-family:宋体'>参与者可以是行为人用户</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>或者是软件</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; 2. </span><span
+style='font-family:宋体'>数据总是过时的</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在多协作的环境中</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>数据一旦显示给了一个用户</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>相同的数据可能已经被其它的参与者修改了</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>说明数据已经过时了</span><span
+lang=EN-US>. </span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在哲学领域有一个命题</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>你是否能踏进同一条河两次</span><span
+lang=EN-US>? </span><span style='font-family:宋体'>在多协作的环境中也有类似的问题</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>你看到的数据总是过时的</span><span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>案例</span><span lang=EN-US>:</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在查询出还有电影场次后</span><span
+lang=EN-US>,&nbsp; </span><span style='font-family:宋体'>你开始填自己的记录信息</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>这时可能别人已经订购了你已经选择的座位</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>或者这个时候</span><span lang=EN-US>,
+</span><span style='font-family:宋体'>一个事件到达银行说你信用卡有拖欠</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>但最后你提交了这次订购，结果订购失败。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>CQRS</span></b><b><span
+style='font-family:宋体'>与模型</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN-US>&nbsp;</span></b></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在与</span><span lang=EN-US>command</span><span
+style='font-family:宋体'>模型的交互中产生了事件</span><span lang=EN-US>,&nbsp; </span><span
+style='font-family:宋体'>顺序事件的累积可以捕获状态的所有变化</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>这种交互模式称为事件源</span><span lang=EN-US>(Event Sourcing) .</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>事件源</span><span lang=EN-US>(Event
+Sourcing)</span><span style='font-family:宋体'>使得系统有了审计的功能</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>回放事件可以使系统恢复到某个时间点的状态</span><span
+lang=EN-US>. </span><span style='font-family:宋体'>事件源</span><span lang=EN-US>(Event
+Sourcing)</span><span style='font-family:宋体'>使</span><span lang=EN-US>command</span><span
+style='font-family:宋体'>部分引入了异步的机制</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>队列中的消息不需要马上处理</span><span lang=EN-US>, event handler</span><span
+style='font-family:宋体'>可以异步的消费事件</span><span lang=EN-US>.</span><span
+style='font-family:宋体'>当</span><span lang=EN-US>commands</span><span
+style='font-family:宋体'>部分产生错误后</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>直接向客户端回个错误并不友好</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>这时可以引入回滚和重试机制</span><span lang=EN-US>.&nbsp; </span><span
+style='font-family:宋体'>在系统恢复正常之后</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>队列中的消息重新发送并且用户接受到确认</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=270 height=447 id="图片 4"
+src="cqrs.files/image001.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>单一模型</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>图</span><span lang=EN-US>1)</span><span
+style='font-family:宋体'>，模型的分离</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>图</span><span lang=EN-US>2)</span><span
+style='font-family:宋体'>，模型的融合</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>图</span><span lang=EN-US>3)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; Query</span><span style='font-family:
+宋体'>与</span><span lang=EN-US>Command</span><span style='font-family:宋体'>两种行为的分离使得两个服务公用模型的分离也成为自然</span><span
+lang=EN-US>(</span><span style='font-family:宋体'>图</span><span lang=EN-US>2)</span><span
+style='font-family:宋体'>。单一模型</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>图</span><span lang=EN-US>1)</span><span
+style='font-family:宋体'>分离成了两个模型</span><span lang=EN-US>:</span><span
+style='font-family:宋体'>查询模型和命令模型</span><span lang=EN-US>.</span><span
+style='font-family:宋体'>接口相应也分离成查询接口和命令接口</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>客户端通过命令接口路由变化信息到命令模型</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>查询模型和命令模型之间往往通过异步方式同步数据</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>客户端通过查询接口读取查询模型以得到更新后的数据</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>但是模型在上下文中孤立的存在并不多见，更多模型之间会有相互的渗透，融合</span><span
+lang=EN-US>(</span><span style='font-family:宋体'>图</span><span lang=EN-US>3)</span><span
+style='font-family:宋体'>。共享内核表示了命令模型和查询模型之间重合的部分</span><span lang=EN-US>. (DDD)</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在</span><span lang=EN-US>DDD</span><span
+style='font-family:宋体'>领域中</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>通用子系统可以代表更通用的服务</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>在存储系统中</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>通用子系统代表了在存储介质上的数据结构的融合</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>公用</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>结合</span><span lang=EN-US>Event
+Souring </span><span style='font-family:宋体'>和模型共享内核来了解一下通用存储引擎的设计思路</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><i><span style='font-family:宋体'>案例</span><span
+lang=EN-US>: BigTable</span></i></b><b><i><span style='font-family:宋体'>和</span><span
+lang=EN-US>Cassandra</span></i></b><b><i><span style='font-family:宋体'>的通用存储引擎</span></i></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=314 height=176 id="图片 2"
+src="cqrs.files/image002.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; (</span><span
+style='font-family:宋体'>通用存储引擎图</span><span lang=EN-US>4)</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>数据写入时需要先写操作日志</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>操作日志可以看成是</span><span
+lang=EN-US>Event Souring</span><span style='font-family:宋体'>的持久化保存</span><span
+lang=EN-US>.</span><span style='font-family:宋体'>成功后应用到内存中的</span><span
+lang=EN-US>MemTable</span><span style='font-family:宋体'>中</span><span
+lang=EN-US>. </span><span style='font-family:宋体'>当内存中的</span><span lang=EN-US>MemTable</span><span
+style='font-family:宋体'>达到一定大小</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>需要将</span><span lang=EN-US>MemTable dump</span><span
+style='font-family:宋体'>到磁盘中生成</span><span lang=EN-US>SSTable.</span><span
+style='font-family:宋体'>由于数据同时存在</span><span lang=EN-US>MemTable</span><span
+style='font-family:宋体'>和可能多个</span><span lang=EN-US>SSTable</span><span
+style='font-family:宋体'>中</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>读取操作需要按老到新合并</span><span lang=EN-US>SSTable</span><span
+style='font-family:宋体'>和内存中的</span><span lang=EN-US>MemTable</span><span
+style='font-family:宋体'>数据</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>可以看到写操作对应的命令模型是</span><span lang=EN-US>MemTable, </span><span
+style='font-family:宋体'>读操作对应的查询模型是</span><span lang=EN-US>MemTable</span><span
+style='font-family:宋体'>和多个</span><span lang=EN-US>SSTable,MemTable</span><span
+style='font-family:宋体'>在读写时成为了共享模型</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>以达到</span><span lang=EN-US>’</span><span
+style='font-family:宋体'>提高写性能</span><span lang=EN-US>,&nbsp; </span><span
+style='font-family:宋体'>亦不降低读性能</span><span lang=EN-US>’</span><span
+style='font-family:宋体'>的目的</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>CQRS</span></b><b><span
+style='font-family:宋体'>与</span><span lang=EN-US>RESTFUL</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在</span><span lang=EN-US>REST</span><span
+style='font-family:宋体'>风格的系统中</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>资源动词</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>名词</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>表现三个维度上的分离</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>形成了资源行为</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>统一接口</span><span lang=EN-US>),&nbsp; </span><span
+style='font-family:宋体'>资源状态</span><span lang=EN-US>,&nbsp; </span><span
+style='font-family:宋体'>资源表现形式</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>REST</span><span style='font-family:宋体'>的</span><span
+lang=EN-US>6</span><span style='font-family:宋体'>个约束中包括统一接口</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>能够使客户端和服务端独立的演化。统一接口包括</span><span
+lang=EN-US>PUT, GET, POST</span><span style='font-family:宋体'>等</span><span
+lang=EN-US>Http</span><span style='font-family:宋体'>方法</span><span lang=EN-US>.&nbsp;
+PUT,&nbsp; POST</span><span style='font-family:宋体'>类的接口可以归为</span><span
+lang=EN-US>command</span><span style='font-family:宋体'>部分</span><span
+lang=EN-US>, GET </span><span style='font-family:宋体'>类的接口可以归为</span><span
+lang=EN-US>query</span><span style='font-family:宋体'>部分</span><span lang=EN-US>.
+</span></p>
+
+<p class=MsoNormal><span lang=EN-US>CQRS</span><span style='font-family:宋体'>使得资源行为维度能够再分</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>形成对服务层</span><span lang=EN-US>,
+</span><span style='font-family:宋体'>模型层</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>数据存取层</span><span lang=EN-US>(DAO), </span><span
+style='font-family:宋体'>数据源层的纵向切分</span><span lang=EN-US>,&nbsp; </span><span
+style='font-family:宋体'>形成</span><span lang=EN-US>command</span><span
+style='font-family:宋体'>和</span><span lang=EN-US>query</span><span
+style='font-family:宋体'>两个子系统</span><span lang=EN-US>.REST</span><span
+style='font-family:宋体'>统一接口是系统的水平接口，</span><span lang=EN-US>CQRS</span><span
+style='font-family:宋体'>可以看成是系统的垂直接口。</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在系统中</span><span lang=EN-US>, C</span><span
+style='font-family:宋体'>和</span><span lang=EN-US>Q</span><span style='font-family:
+宋体'>的分离可以看成是对系统中最粗粒度层次的划分</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>案例</span><span lang=EN-US>:Facebook</span><span
+style='font-family:宋体'>缓存架构</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=322 height=335 id="图片 3"
+src="cqrs.files/image003.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>(Facebook</span><span style='font-family:
+宋体'>缓存架构图</span><span lang=EN-US>5)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:宋体'>&#8226;<span
+lang=EN-US>&nbsp; </span>整体<span lang=EN-US>REST</span>架构分成<span lang=EN-US>PUT(Query</span>部分<span
+lang=EN-US>), POST(Command</span>部分<span lang=EN-US>)</span>两个部分<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:宋体'>&#8226;<span
+lang=EN-US>&nbsp; Cache</span>分<span lang=EN-US>Page cache, fragment cache, row
+cache, vector Cache, cache</span>命中率见图。 </span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:宋体'>&#8226;<span
+lang=EN-US>&nbsp; Page Cache</span>和<span lang=EN-US>Fragment cache</span>存放了<span
+lang=EN-US>API</span>各种请求格式的数据，包括<span lang=EN-US>4</span>种资源表现形式 <span
+lang=EN-US>XML, JSON, RSS, ATOM</span>。</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:宋体'>&#8226;<span
+lang=EN-US>&nbsp; </span>发表<span lang=EN-US>Tweets</span>是先放入<span lang=EN-US>Kestrel,
+</span>再异步处理，<span lang=EN-US>Kestrel</span>用的也是<span lang=EN-US>memcached</span>协议。<span
+lang=EN-US>Kestrel</span>可以看成<span lang=EN-US>Event Souring, Vector Cache</span>是<span
+lang=EN-US>Command</span>部分和<span lang=EN-US>Query</span>部分之间的共享模型<span
+lang=EN-US>.&nbsp; </span></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>CQRS</span></b><b><span
+style='font-family:宋体'>与一致性</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>根据弱</span><span lang=EN-US>CAP</span><span
+style='font-family:宋体'>原理，在分布式系统中，往往需要达到</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>一致性</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>可用性</span><span lang=EN-US>,</span><span
+style='font-family:宋体'>分区容忍性</span><span lang=EN-US>)</span><span
+style='font-family:宋体'>三者的平衡，增强其中的一方就会削弱另外两方。在分布式系统中</span><span lang=EN-US>, P</span><span
+style='font-family:宋体'>总是需要保证的</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>所以需要在</span><span lang=EN-US>C</span><span
+style='font-family:宋体'>和</span><span lang=EN-US>A</span><span style='font-family:
+宋体'>之间做取舍</span><span lang=EN-US>.&nbsp; CQRS</span><span style='font-family:
+宋体'>中的</span><span lang=EN-US>S(</span><span style='font-family:宋体'>分离</span><span
+lang=EN-US>)</span><span style='font-family:宋体'>隐喻了</span><span lang=EN-US>P, </span><span
+style='font-family:宋体'>即分区容忍性</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>贯彻</span><span lang=EN-US>CQRS</span><span
+style='font-family:宋体'>的系统通过多种方式来实现各种级别的一致性，其中包括</span><span lang=EN-US>MS,
+MM(MMS, MMM), </span><span style='font-family:宋体'>两阶段提交</span><span lang=EN-US>,
+Paxos</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>强一致性：假如</span><span lang=EN-US>A
+</span><span style='font-family:宋体'>先写入了一个值到存储系统，存储系统<b>保证</b>后续</span><span
+lang=EN-US>A</span><span style='font-family:宋体'>，</span><span lang=EN-US>B,C</span><span
+style='font-family:宋体'>的读取操作都将返回最新值。</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>弱一致性：假如</span><span lang=EN-US>A</span><span
+style='font-family:宋体'>先写入了一个值到存储系统，存储系统<b>不能保证</b>后续</span><span lang=EN-US>A</span><span
+style='font-family:宋体'>，</span><span lang=EN-US>B</span><span style='font-family:
+宋体'>，</span><span lang=EN-US>C</span><span style='font-family:宋体'>的读取操作能读取到最新值。</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>最终一致性：最终一致性是弱一致性的一种特例。假如</span><span
+lang=EN-US>A</span><span style='font-family:宋体'>首先</span><span lang=EN-US>write</span><span
+style='font-family:宋体'>了一个值到存储系统，存储系统保证如果在</span><span lang=EN-US>A</span><span
+style='font-family:宋体'>，</span><span lang=EN-US>B</span><span style='font-family:
+宋体'>，</span><span lang=EN-US>C</span><span style='font-family:宋体'>后续读取之前没有其它写操作更新同样的值的话，<b>最终</b>所有的读取操作都会读取到</span><span
+lang=EN-US>A</span><span style='font-family:宋体'>写入的最新值。</span></p>
+
+<p class=MsoListParagraph style='margin-left:28.5pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Wingdings'>n<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US>MS</span></p>
+
+<p class=MsoNormal style='margin-left:10.5pt'><span style='font-family:宋体'>在分布式系统中，通过读写多个数据副本来做到读写分离。</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US>MS</span><span
+style='font-family:宋体'>方式中</span><span lang=EN-US>, Master</span><span
+style='font-family:宋体'>会承担起写请求</span><span lang=EN-US>(Command</span><span
+style='font-family:宋体'>部分</span><span lang=EN-US>)</span><span
+style='font-family:宋体'>的负载</span><span lang=EN-US>, Slave</span><span
+style='font-family:宋体'>会承担起读请求</span><span lang=EN-US>(Query</span><span
+style='font-family:宋体'>部分</span><span lang=EN-US>)</span><span
+style='font-family:宋体'>的负载</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>多个</span><span lang=EN-US>slave</span><span
+style='font-family:宋体'>副本通过同步</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>异步</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>半同步的方式达到与</span><span lang=EN-US>Master</span><span
+style='font-family:宋体'>数据的一致性</span><span lang=EN-US>.</span><span
+style='font-family:宋体'>异步同步对延时和吞吐量这两个性能指标有好处</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>在读多写少的系统中</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>增加读的副本可以相对廉价的提高</span><span
+lang=EN-US>Query</span><span style='font-family:宋体'>部分</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>读请求端</span><span lang=EN-US>)</span><span
+style='font-family:宋体'>的水平可伸缩性</span><span lang=EN-US>.&nbsp; </span><span
+style='font-family:宋体'>如果有大量突增请求</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>可以相应调高读的副本数</span><span lang=EN-US>.--query</span><span
+style='font-family:宋体'>部分的可伸缩性</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-left:28.5pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Wingdings'>n<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US>MM</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US><a
+href="http://en.wikipedia.org/wiki/Multi-master_replication"><span
+style='color:windowtext;text-decoration:none'>Multi-master</span></a></span><span
+style='font-family:宋体'>指一个系统存在多个</span><span lang=EN-US>master, </span><span
+style='font-family:宋体'>每个</span><span lang=EN-US>master</span><span
+style='font-family:宋体'>都具有</span><span lang=EN-US>read-write</span><span
+style='font-family:宋体'>能力，可以根据时间戳或业务逻辑合并版本。具备最终一致性。</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>案例</span></p>
+
+<p class=MsoNormal><span lang=EN-US>BigTable: </span><span style='font-family:
+宋体'>同一个时刻同一个</span><span lang=EN-US>tablet</span><span style='font-family:宋体'>只能被一台</span><span
+lang=EN-US>Tablet Server</span><span style='font-family:宋体'>服务</span><span
+lang=EN-US>. </span><span style='font-family:宋体'>强一致性的分布式索引</span><span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; GFS:&nbsp; MS</span><span
+style='font-family:宋体'>实现的弱一致性分布式存储系统</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; Dynamo</span><span
+style='font-family:宋体'>和</span><span lang=EN-US>Cassandra: MM</span><span
+style='font-family:宋体'>实现的具备最终一致性的存储系统</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>可能出现同一个</span><span lang=EN-US>key</span><span
+style='font-family:宋体'>被多台机器操作的情况</span><span lang=EN-US>.</span><span
+style='font-family:宋体'>多台机器上执行的顺序是无法保证的</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>需要依赖基于</span><span lang=EN-US>vector lock</span><span
+style='font-family:宋体'>的冲突合并方法解决冲突</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>默认的解决方案是</span><span lang=EN-US>”last write wins”, </span><span
+style='font-family:宋体'>即在读的时候合并多个写者产生的多个版本的数据</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>--To do</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>CQRS</span></b><b><span
+style='font-family:宋体'>与数据存储</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; Command</span><span
+style='font-family:宋体'>部分</span><span lang=EN-US>:</span><span
+style='font-family:宋体'>　相对关注事务处理</span><span lang=EN-US>,</span><span
+style='font-family:宋体'>持久化为关系结构数据</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>在数据库中</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>使用第</span><span lang=EN-US>3</span><span
+style='font-family:宋体'>范式</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; Query</span><span style='font-family:
+宋体'>部分</span><span lang=EN-US>: </span><span style='font-family:宋体'>相对关注性能</span><span
+lang=EN-US>. </span><span style='font-family:宋体'>使用反范式的方式来最小化数据的级联</span><span
+lang=EN-US>.&nbsp; </span><span style='font-family:宋体'>在数据库中</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>可以使用第一范式</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>也可以结合使用</span><span
+lang=EN-US>nosql</span><span style='font-family:宋体'>技术</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>案例</span><span lang=EN-US>:</span><span
+style='font-family:宋体'>　</span><span lang=EN-US>Mysql + Redies</span><span
+style='font-family:宋体'>混合存储</span><span lang=EN-US>(sql + nosql</span><span
+style='font-family:宋体'>混合存储</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=358 height=275 id="图片 1"
+src="cqrs.files/image004.png"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; (Mysql + Redies</span><span
+style='font-family:宋体'>混合存储图</span><span lang=EN-US>6)</span></p>
+
+<p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US>MySQL</span><span
+style='font-family:宋体'>把数据同步到</span><span lang=EN-US>NoSQL</span><span
+style='font-family:宋体'>中</span><span lang=EN-US>,</span><span style='font-family:
+宋体'>这种架构适用于需要把数据同步到多种类型的存储中。</span></p>
+
+<p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US>Nosql</span><span
+style='font-family:宋体'>通过装做是</span><span lang=EN-US>mysql</span><span
+style='font-family:宋体'>的</span><span lang=EN-US>slave, </span><span
+style='font-family:宋体'>从</span><span lang=EN-US>mysql</span><span
+style='font-family:宋体'>同步数据</span><span lang=EN-US>.MySQL</span><span
+style='font-family:宋体'>到</span><span lang=EN-US>NoSQL</span><span
+style='font-family:宋体'>同步的实现可以使用</span><span lang=EN-US>MySQL UDF</span><span
+style='font-family:宋体'>函数，</span><span lang=EN-US>MySQL binlog</span><span
+style='font-family:宋体'>的解析来实现。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>CQRS</span></b><b><span
+style='font-family:宋体'>与分布式事务</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>两阶段提交是实现分布式事务的常用方式</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>协议比较通用</span><span lang=EN-US>.
+</span><span style='font-family:宋体'>但两阶段提交中所有事务序列化的通过</span><span lang=EN-US>master
+coordinator, </span><span style='font-family:宋体'>是吞吐率和延迟的杀手</span><span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>CQRS</span><span style='font-family:宋体'>是完全建立在</span><span
+lang=EN-US>BASE(<strong><span style='font-family:"Calibri","sans-serif"'>B</span></strong>asic&nbsp;<strong><span
+style='font-family:"Calibri","sans-serif"'>A</span></strong>vailability,&nbsp;<strong><span
+style='font-family:"Calibri","sans-serif"'>S</span></strong>oft-state,&nbsp;<strong><span
+style='font-family:"Calibri","sans-serif"'>E</span></strong>ventual
+consistency)</span><span style='font-family:宋体'>事务基础上的</span><span lang=EN-US>.
+</span><span style='font-family:宋体'>在</span><span lang=EN-US>CQRS</span><span
+style='font-family:宋体'>实现中</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>通过降低对写端的压力</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>减少锁的竞争和死锁的可能</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>来增加写端的性能</span><span lang=EN-US>.</span><span
+style='font-family:宋体'>各种实现方式会有自定义的协议</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>相对于两阶段提交灵活但不够通用</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在对性能要求不高的系统中</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>应该采用两阶段提交加快开发</span><span
+lang=EN-US>. </span><span style='font-family:宋体'>在对性能要求不是很高系统中</span><span
+lang=EN-US>,&nbsp; </span><span style='font-family:宋体'>应该考虑采用消息队列</span><span
+lang=EN-US>. </span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>案例</span><span lang=EN-US>1:</span><span
+style='font-family:宋体'>　</span><span lang=EN-US>ebay</span><span
+style='font-family:宋体'>分布式事务</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>消息队列上的</span><span lang=EN-US>CQRS
++ </span><span style='font-family:宋体'>消息应用状态表</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 1. </span><span style='font-family:
+宋体'>更新业务表</span><span lang=EN-US>A </span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 2. </span><span style='font-family:
+宋体'>更新业务表</span><span lang=EN-US>B</span><span style='font-family:宋体'>的事件放入消息队列</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 3. </span><span style='font-family:
+宋体'>提交事务</span><span lang=EN-US>1(</span><span style='font-family:宋体'>包括步骤</span><span
+lang=EN-US>1, 2)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 4. </span><span style='font-family:
+宋体'>查询队列中的消息</span><span lang=EN-US>,&nbsp; </span><span style='font-family:
+宋体'>更新业务表</span><span lang=EN-US>B.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 5. </span><span style='font-family:
+宋体'>插入消息应用状态表</span><span lang=EN-US>message_applied</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 6. </span><span style='font-family:
+宋体'>提交事务</span><span lang=EN-US>2(</span><span style='font-family:宋体'>包括步骤</span><span
+lang=EN-US>5, 6)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 7. </span><span style='font-family:
+宋体'>如果上述事务成功之后</span><span lang=EN-US>, dequeue message</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; 8. </span><span style='font-family:
+宋体'>删除消息应用状态表中的事件</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在关注第</span><span lang=EN-US>2</span><span
+style='font-family:宋体'>点和第</span><span lang=EN-US>4</span><span
+style='font-family:宋体'>点之后</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>可以看到队列的插入</span><span lang=EN-US>(command)</span><span
+style='font-family:宋体'>和查询</span><span lang=EN-US>(query) </span><span
+style='font-family:宋体'>放在了两个事务中</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>案例</span><span lang=EN-US>2:&nbsp;
+</span><span style='font-family:宋体'>淘宝分布式事务</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>日志表上的</span><span lang=EN-US>CQRS
++ </span><span style='font-family:宋体'>去重表</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>1.&nbsp; </span><span style='font-family:
+宋体'>更新业务表</span><span lang=EN-US>A</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2.&nbsp; </span><span style='font-family:
+宋体'>更新业务表</span><span lang=EN-US>B</span><span style='font-family:宋体'>的事件放入日志表</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>并自动生成一个唯一的</span><span
+lang=EN-US>transactionID</span><span style='font-family:宋体'>。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>3.&nbsp; </span><span style='font-family:
+宋体'>提交事务</span><span lang=EN-US>1(</span><span style='font-family:宋体'>包括步骤</span><span
+lang=EN-US>1, 2)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal><span lang=EN-US>4. </span><span style='font-family:宋体'>消息中间件保证从主机</span><span
+lang=EN-US>1</span><span style='font-family:宋体'>上读取更新业务表</span><span
+lang=EN-US>B</span><span style='font-family:宋体'>的事件和</span><span lang=EN-US>transactionID,
+</span><span style='font-family:宋体'>并且这个消息路由到主机</span><span lang=EN-US>2.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>5. </span><span style='font-family:宋体'>更新业务表</span><span
+lang=EN-US>B</span></p>
+
+<p class=MsoNormal><span lang=EN-US>6. </span><span style='font-family:宋体'>将</span><span
+lang=EN-US>transactionID</span><span style='font-family:宋体'>插入去重表</span></p>
+
+<p class=MsoNormal><span lang=EN-US>7. </span><span style='font-family:宋体'>提交事务</span><span
+lang=EN-US>2(</span><span style='font-family:宋体'>包括步骤</span><span lang=EN-US>5,
+6)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=554 height=479 id="图片 5"
+src="cqrs.files/image005.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>(ebay</span><span style='font-family:宋体'>分布式事务图</span><span
+lang=EN-US>7, </span><span style='font-family:宋体'>淘宝分布式事务图</span><span
+lang=EN-US>8)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>这两个实现方式</span><span lang=EN-US>,
+</span><span style='font-family:宋体'>它们有之间的共性</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>就是有一个元素被分步骤的使用了</span><span lang=EN-US>CQRS.</span><span
+style='font-family:宋体'>在案例</span><span lang=EN-US>1</span><span
+style='font-family:宋体'>中是消息队列，案例</span><span lang=EN-US>2</span><span
+style='font-family:宋体'>中是日志表</span><span lang=EN-US>. </span><span
+style='font-family:宋体'>从</span><span lang=EN-US>CQRS</span><span
+style='font-family:宋体'>的角度看</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>这两种实现方式没有本质的区别</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>方式</span><span lang=EN-US>2</span><span
+style='font-family:宋体'>可以看成是方式</span><span lang=EN-US>1</span><span
+style='font-family:宋体'>的变体</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>案例</span><span
+lang=EN-US>2</span><span style='font-family:宋体'>中的去重表等价于案例</span><span
+lang=EN-US>1</span><span style='font-family:宋体'>中的消息应用状态表</span><span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>案例</span><span
+lang=EN-US>2</span><span style='font-family:宋体'>看似复杂</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>多了步骤</span><span lang=EN-US>4, </span><span
+style='font-family:宋体'>实际是保持事务</span><span lang=EN-US>1,2</span><span
+style='font-family:宋体'>同步临界区的最小化</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>等于是把案例</span><span lang=EN-US>1</span><span
+style='font-family:宋体'>中查询队列中的消息</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>步骤</span><span lang=EN-US>4)</span><span
+style='font-family:宋体'>剥离出事务</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>防止不必要的查询错误导致回滚整个事务</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>案例</span><span
+lang=EN-US>1</span><span style='font-family:宋体'>的事务</span><span lang=EN-US>1</span><span
+style='font-family:宋体'>牵涉到了业务表</span><span lang=EN-US>A</span><span
+style='font-family:宋体'>和队列的混合型业务事务</span><span lang=EN-US>,</span><span
+style='font-family:宋体'>实现复杂。案例</span><span lang=EN-US>2</span><span
+style='font-family:宋体'>的两个事务都是数据库的系统事务</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>可以使用两阶段提交</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>相对通用</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>案例</span><span
+lang=EN-US>2</span><span style='font-family:宋体'>的去重表没有删除过</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>能保证最终的消息都是已经成功的事务</span><span
+lang=EN-US>.</span><span style='font-family:宋体'>案例</span><span lang=EN-US>1 </span><span
+style='font-family:宋体'>有</span><span lang=EN-US>dequeue message</span><span
+style='font-family:宋体'>步骤</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>并在事务外</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>在出现故障后</span><span lang=EN-US>, message_applied</span><span
+style='font-family:宋体'>会留下一些垃圾内容</span><span lang=EN-US>. -- </span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoListParagraph style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:Wingdings'>n<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><b><span lang=EN-US>CQRS</span></b><b><span style='font-family:
+宋体'>与</span><span lang=EN-US>CDN</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>在大规模</span><span lang=EN-US>web</span><span
+style='font-family:宋体'>站点中</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>动态数据和静态数据</span><span lang=EN-US>(</span><span
+style='font-family:宋体'>图片</span><span lang=EN-US>)</span><span
+style='font-family:宋体'>的分离是优化的通用策略</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; CQRS</span><span
+style='font-family:宋体'>能够在</span><span lang=EN-US>Query</span><span
+style='font-family:宋体'>端做到极致的优化</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>例如缓存</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>分区</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>备份</span><span lang=EN-US>(replication), </span><span
+style='font-family:宋体'>分布式的</span><span lang=EN-US>CDN. CDN</span><span
+style='font-family:宋体'>是一种离用户相对近的边缘缓存</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>能提高用户体验</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>案例</span><span lang=EN-US>:&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>淘宝</span><span lang=EN-US>CDN</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=427 height=251 id="图片 7"
+src="cqrs.files/image006.jpg"></span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>CQRS</span></b><b><span
+style='font-family:宋体'>原理</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-indent:10.5pt'><span
+lang=EN-US>CQRS</span><span style='font-family:宋体'>来源于</span><span lang=EN-US>Bertrand
+Meyer</span><span style='font-family:宋体'>提出的</span><span lang=EN-US>CQS</span><span
+style='font-family:宋体'>原理。</span><span lang=EN-US>CQS</span><span
+style='font-family:宋体'>原理从</span><span lang=EN-US>OOP</span><span
+style='font-family:宋体'>中推导出来，大致是说如果你返回一个值你就不能改变状态。如果你改变了状态，你的返回值必须是</span><span
+lang=EN-US>void</span><span style='font-family:宋体'>类型的。</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US>CQS</span><span
+style='font-family:宋体'>原理其实在很多领域都有应用</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>包括</span><span lang=EN-US>OOP</span><span
+style='font-family:宋体'>中字段的的</span><span lang=EN-US>setter/getter,Java String(copy-on-write),
+Java thread(ConcurrentHashMap</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>读写分离锁</span><span
+lang=EN-US>), snapshot(copy-on-write), </span><span style='font-family:宋体'>数据库索引</span><span
+lang=EN-US>, </span><span style='font-family:宋体'>数据库</span><span lang=EN-US>sql(DML,
+DDL)</span><span style='font-family:宋体'>中都可以看到</span><span lang=EN-US>CQS</span><span
+style='font-family:宋体'>原理的影子</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span style='font-family:宋体'>小结</span><span lang=EN-US>:</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US>CQS</span><span
+style='font-family:宋体'>中的分离</span><span lang=EN-US>(S)</span><span
+style='font-family:宋体'>粒度</span><span lang=EN-US>,</span><span
+style='font-family:宋体'>小到对象状态的</span><span lang=EN-US>setter</span><span
+style='font-family:宋体'>和</span><span lang=EN-US>getter</span><span
+style='font-family:宋体'>方法</span><span lang=EN-US>, </span><span
+style='font-family:宋体'>大到子系统的形成</span><span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:宋体'>就如</span><span
+lang=EN-US>Greg</span><span style='font-family:宋体'>谈到的，</span><span lang=EN-US>
+CQRS</span><span style='font-family:宋体'>本身是个简单的小模式，有趣的是在结合两个服务时所要考虑的架构属性。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>CQRS</span><span style='font-family:宋体'>在复杂性管理和提高系统伸缩性有着独特的优势。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>参考</span><span lang=EN-US>:</span></p>
+
+<p class=MsoNormal><span lang=EN-US>1. clarified CQRS </span></p>
+
+<p class=MsoNormal><span lang=EN-US>http://wenku.baidu.com/view/002c419851e79b896802265e.html</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2. CQRS </span></p>
+
+<p class=MsoNormal><span lang=EN-US>http://martinfowler.com/bliki/CQRS.html</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>3. CQRS Documents by Greg Young</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="http://wenku.baidu.com/view/6aaa6c0690c69ec3d5bb751e.html">http://wenku.baidu.com/view/6aaa6c0690c69ec3d5bb751e.html</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>4.&nbsp; NoSQL</span><span
+style='font-family:宋体'>架构实践（一）——以</span><span lang=EN-US>NoSQL</span><span
+style='font-family:宋体'>为辅</span></p>
+
+<p class=MsoNormal><span lang=EN-US>http://www.infoq.com/cn/news/2011/02/nosql-architecture-practice/</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>5. DDD -- domain driven design (</span><span
+style='font-family:宋体'>共享内存</span><span lang=EN-US>)&nbsp; --&nbsp; <a
+name="_GoBack"></a>Even Eric</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>6. <a
+href="http://oojdon.iteye.com/blog/903203"><span style='color:windowtext;
+text-decoration:none'>Rethinking architecture with CQRS</span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>http://oojdon.iteye.com/blog/903203</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>7. <a
+href="http://timyang.net/architecture/twitter-cache-architecture/"
+title="Permanent Link to Twitter架构图(cache篇)"><span style='color:windowtext;
+text-decoration:none'>Twitter</span><span lang=EN-US style='font-family:宋体;
+color:windowtext;text-decoration:none'><span lang=EN-US>架构图</span></span><span
+style='color:windowtext;text-decoration:none'>(cache</span><span lang=EN-US
+style='font-family:宋体;color:windowtext;text-decoration:none'><span lang=EN-US>篇</span></span><span
+style='color:windowtext;text-decoration:none'>)</span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="http://timyang.net/architecture/twitter-cache-architecture/">http://timyang.net/architecture/twitter-cache-architecture/</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>7.&nbsp; Event Sourcing -- Martin fowler </span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
