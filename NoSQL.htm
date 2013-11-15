@@ -114,6 +114,14 @@ p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
 	text-justify:inter-ideograph;
 	font-size:9.0pt;
 	font-family:"Calibri","sans-serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:21.0pt;
+	font-size:10.5pt;
+	font-family:"Calibri","sans-serif";}
 span.Char
 	{mso-style-name:"页眉 Char";
 	mso-style-link:页眉;}
@@ -167,7 +175,7 @@ ul
 <div class=Section1 style='layout-grid:15.6pt'>
 
 <p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><b><span lang=EN-US style='font-size:16.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NoSQL</span></b><b><span
+</span><b><span lang=EN-US style='font-size:16.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NoSQL</span></b><b><span
 style='font-size:16.0pt;font-family:宋体'>知识点</span></b></p>
 
 <p class=MsoNormal><b><span lang=EN-US style='font-size:12.0pt;font-family:
@@ -362,55 +370,185 @@ style='font-size:12.0pt;font-family:宋体'>单机事务<span lang=EN-US>&nbsp;&nbsp; 
 style='font-size:12.0pt;font-family:宋体'>ACID</span><span style='font-size:12.0pt;
 font-family:宋体'>保证</span></p>
 
+<p class=MsoNormal style='text-indent:30.0pt'><span style='font-size:12.0pt;
+font-family:宋体'>（<span lang=EN-US>C </span>一致性）（<span lang=EN-US>I </span>隔离性）：</span></p>
+
+<p class=MsoNormal style='text-indent:30.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp; </span><span
+style='font-size:12.0pt;font-family:宋体'>主要有以下几种实现方式</span></p>
+
+<p class=MsoListParagraph style='margin-left:66.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:宋体'>依托锁来实现的。<span
+lang=EN-US>&nbsp;&nbsp; </span></span></p>
+
+<p class=MsoListParagraph style='margin-left:66.05pt;text-indent:6.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>分类：读写锁， 排他锁。 </span></p>
+
+<p class=MsoListParagraph style='margin-left:66.05pt;text-indent:6.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>4</span><span
+style='font-size:12.0pt;font-family:宋体'>个隔离级别和锁的粒度有关。</span></p>
+
+<p class=MsoListParagraph style='margin-left:66.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>copy-on-write</span><span
+style='font-size:12.0pt;font-family:宋体'>（<span lang=EN-US>MVCC</span>） <span
+lang=EN-US>&nbsp;&nbsp;</span></span></p>
+
+<p class=MsoListParagraph style='margin-left:66.05pt;text-indent:6.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>读写之间互不影响，写不阻塞读， 读不阻塞写， 效率高。 </span></p>
+
+<p class=MsoListParagraph style='margin-left:66.05pt;text-indent:6.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>实现了隔离级别中用的最多的第二，第三级别。</span></p>
+
+<p class=MsoNormal style='text-indent:48.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:宋体'>3</span><span style='font-size:12.0pt;
+font-family:宋体'>． 队列 &nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;</span></p>
+
 <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>II.
 </span><span style='font-size:12.0pt;font-family:宋体'>分布式事务<span lang=EN-US>&nbsp;&nbsp;
 &nbsp;</span></span></p>
 
-<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:12.0pt;font-family:宋体'>悲观锁： 两阶段提交， 三阶段提交</span></p>
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;</span><span
+style='font-size:12.0pt;font-family:宋体'>常规实现</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:0cm'><span
+style='font-size:12.0pt;font-family:宋体'>悲观锁： 读写锁（两阶段提交， 三阶段提交）</span></p>
 
 <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:12.0pt;font-family:宋体'>乐观锁： <span lang=EN-US>Read-Test-Write</span>，<span
-lang=EN-US> CAS</span>（<span lang=EN-US>compare and set</span>）</span></p>
+&nbsp;&nbsp;&nbsp;</span><span style='font-size:12.0pt;font-family:宋体'>乐观锁： <span
+lang=EN-US>Read-Test-Write</span>，<span lang=EN-US> CAS</span>（<span
+lang=EN-US>compare and set</span>）</span></p>
 
-<p class=MsoNormal style='text-indent:30.0pt'><span style='font-size:12.0pt;
-font-family:宋体'>去分布式事务 （参考<span lang=EN-US> &lt;&lt;</span></span><span
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:宋体'>分布式的<span lang=EN-US>MVCC&nbsp;
+Eg. MegaStore, Percolator </span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:宋体'>分布式锁： 分布式导致高延迟， 并且加锁解锁多次交互。</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:宋体'>避免分布式锁的实现</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:0cm'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>CAP</span><span
+style='font-size:12.0pt;font-family:宋体'>理论中适当放宽一致性。 并兼顾一致性， 响应时间，可用性。 </span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:0cm'><span
+style='font-size:12.0pt;font-family:宋体'>参考实现 </span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:0cm'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&lt;&lt;</span><span
 lang=EN-US><a href="http://rdc.taobao.com/blog/cs/?p=671" target="_blank"><span
-lang=EN-US style='font-family:宋体'><span lang=EN-US>用消息队列和消息应用状态表来消除分布式事务</span></span></a>&gt;&gt;</span><span
-style='font-size:12.0pt;font-family:宋体'>）</span></p>
+lang=EN-US style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:
+none'><span lang=EN-US>用消息队列和消息应用状态表来消除分布式事务</span></span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&gt;&gt;</span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:0cm'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&lt;&lt;</span><span
+style='font-size:12.0pt;font-family:宋体'>海量存储系列之六<span lang=EN-US>&gt;&gt;</span></span></p>
+
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:6.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='font-size:12.0pt;font-family:
+宋体'>5. </span></b><b><span style='font-size:12.0pt;font-family:宋体'>动态还是静态的数据结构</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:宋体'>关系数据库模型： 动态更新的<span
+lang=EN-US>B+</span>树， 写数据时，需要更新<span lang=EN-US>B+</span>树。 读写依赖， 实现复杂， 有性能上限。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;
+Nosql</span><span style='font-size:12.0pt;font-family:宋体'>：动态数据和静态数据分离， <span
+lang=EN-US>MemTable(</span>动态<span lang=EN-US>) + SSTable</span>（静态）。牺牲读， 提升写性能。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='font-size:12.0pt;font-family:
+宋体'>6. </span></b><b><span style='font-size:12.0pt;font-family:宋体'>索引和<span
+lang=EN-US>join</span></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;
+</span><span style='font-size:12.0pt;font-family:宋体'>关系数据库索引：单机索引</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;
+NoSQL</span><span style='font-size:12.0pt;font-family:宋体'>索引：系统层面， 全局索引。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;
+</span><span style='font-size:12.0pt;font-family:宋体'>关系数据库<span lang=EN-US>Join</span>：
+存储引擎层面支持<span lang=EN-US>join</span>。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;
+NoSQL Join</span><span style='font-size:12.0pt;font-family:宋体'>：一般根据应用来决定<span
+lang=EN-US>join</span>的实现。<span lang=EN-US>&nbsp; </span></span></p>
+
+<p class=MsoNormal style='text-indent:12.0pt'><span style='font-size:12.0pt;
+font-family:宋体'>参考实现 <span lang=EN-US>&nbsp;&lt;&lt;Hbase</span>二级索引<span
+lang=EN-US>&gt;&gt;</span></span></p>
 
 <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;</span></p>
 
 <p class=MsoNormal><span style='font-size:12.0pt;font-family:宋体'>参考：</span></p>
 
-<p class=MsoNormal><span lang=EN-US><a
-href="http://blog.nosqlfan.com/html/4139.html"><span style='color:windowtext;
-text-decoration:none'>http://blog.nosqlfan.com/html/4139.html</span></a>&nbsp; NoSQL</span><span
-style='font-family:宋体'>数据库的分布式算法</span></p>
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><a href="http://blog.nosqlfan.com/html/4139.html"><span
+style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:none'>http://blog.nosqlfan.com/html/4139.html</span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp; &nbsp;&nbsp;&nbsp;NoSQL</span><span
+style='font-size:12.0pt;font-family:宋体'>数据库的分布式算法</span></p>
 
-<p class=MsoNormal><span lang=EN-US><a
-href="http://coolshell.cn/articles/7270.html"><span style='color:windowtext;
-text-decoration:none'>http://coolshell.cn/articles/7270.html</span></a>&nbsp; NoSQL
-</span><span style='font-family:宋体'>数据建模技术</span></p>
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><a href="http://coolshell.cn/articles/7270.html"><span
+style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:none'>http://coolshell.cn/articles/7270.html</span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;NoSQL
+</span><span style='font-size:12.0pt;font-family:宋体'>数据建模技术</span></p>
 
-<p class=MsoNormal><span lang=EN-US><a
-href="http://www.nosqlnotes.net/archives/134"><span style='color:windowtext;
-text-decoration:none'>http://www.nosqlnotes.net/archives/134</span></a></span><span
-lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp; </span><span
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><a href="http://www.nosqlnotes.net/archives/134"><span
+style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:none'>http://www.nosqlnotes.net/archives/134</span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</span><span
 style='font-size:12.0pt;font-family:宋体'>分布式系统的数据结构</span></p>
 
-<p class=MsoNormal><span lang=EN-US><a
-href="http://blog.nosqlfan.com/html/955.html"><span style='color:windowtext;
-text-decoration:none'>http://blog.nosqlfan.com/html/955.html</span></a></span><span
-lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp; </span><span
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><a href="http://blog.nosqlfan.com/html/955.html"><span
+style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:none'>http://blog.nosqlfan.com/html/955.html</span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</span><span
 style='font-size:12.0pt;font-family:宋体'>优雅的<span lang=EN-US>Bitcask</span></span></p>
 
-<p class=MsoNormal><span lang=EN-US><a
-href="http://www.nosqlnotes.net/archives/62"><span style='color:windowtext;
-text-decoration:none'>http://www.nosqlnotes.net/archives/62</span></a></span><span
-style='font-family:宋体'>分布式事务</span></p>
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>5.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><a href="http://www.nosqlnotes.net/archives/62"><span
+style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:none'>http://www.nosqlnotes.net/archives/62</span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:宋体'>分布式事务</span></p>
 
-<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;</span></p>
+<p class=MsoListParagraph style='margin-left:48.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>6.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><a href="http://www.nosqlnotes.net/archives/140"><span
+style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:none'>http://www.nosqlnotes.net/archives/140</span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+SQL</span><span style='font-size:12.0pt;font-family:宋体'>到<span lang=EN-US>NOSQL</span>的思维转变</span></p>
+
+<p class=MsoNormal style='margin-left:30.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:宋体'>7. </span><span lang=EN-US><a
+href="http://hi.baidu.com/learsu/item/c03e6db9ac8ea2a6ebba934c"><span
+style='font-size:12.0pt;font-family:宋体;color:windowtext;text-decoration:none'>http://hi.baidu.com/learsu/item/c03e6db9ac8ea2a6ebba934c</span></a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp; &nbsp;HBase</span><span
+style='font-size:12.0pt;font-family:宋体'>二级索引与<span lang=EN-US>Join</span></span></p>
+
+<p class=MsoNormal style='margin-left:30.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:宋体'>&nbsp;&nbsp; </span></p>
 
 <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'>&nbsp;</span></p>
 
