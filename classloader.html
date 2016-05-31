@@ -1,31 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ï»¿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>ÎŞ±êÌâÎÄµµ</title>
+<title>æ— æ ‡é¢˜æ–‡æ¡£</title>
 </head>
 
 <body>
-<h1>Classloader Ïà¹ØµÄÎÊÌâ
+<h1>Classloader ç›¸å…³çš„é—®é¢˜
 </h1>
-<p>Ò». ±³¾°</p>
-<p> Í¬Ò»¶Î´úÂëÔÚ·şÎñ¿ò¼ÜµÄ·şÎñ¶ËºÍ¿Í»§¶ËÀïÖØÓÃ, ¿Í»§¶ËÀïclassloaderÄÜloadµ½×ÊÔ´ÎÄ¼ş, µ«ÊÇ·şÎñ¶Ë´úÂë²¿ÊğÔÚtomcatÈİÆ÷Àï, classloader²»ÄÜloadµ½×ÊÔ´ÎÄ¼ş.</p>
-<p>¿´À´´úÂëÓĞ¸öbug.Ö±½ÓÉÏ´úÂë:</p>
-<p>¶ş.´úÂë </p>
-<p>1. ¿´µ½¿Í»§¶ËÀïµÄclassloaderÊÇAppClassLoader, ÄÜloadµ½classpathÏÂµÄÎÄ¼ş, ËùÒÔÖ»Òª×ÊÔ´ÎÄ¼şÔÚclasspathÏÂ¾ÍÄÜloadµ½.</p>
+<p>ä¸€. èƒŒæ™¯</p>
+<p> åŒä¸€æ®µä»£ç åœ¨æœåŠ¡æ¡†æ¶çš„æœåŠ¡ç«¯å’Œå®¢æˆ·ç«¯é‡Œé‡ç”¨, å®¢æˆ·ç«¯é‡Œclassloaderèƒ½loadåˆ°èµ„æºæ–‡ä»¶, ä½†æ˜¯æœåŠ¡ç«¯ä»£ç éƒ¨ç½²åœ¨tomcatå®¹å™¨é‡Œ, classloaderä¸èƒ½loadåˆ°èµ„æºæ–‡ä»¶.</p>
+<p>çœ‹æ¥ä»£ç æœ‰ä¸ªbug.ç›´æ¥ä¸Šä»£ç :</p>
+<p>äºŒ.ä»£ç  </p>
+<p>1. çœ‹åˆ°å®¢æˆ·ç«¯é‡Œçš„classloaderæ˜¯AppClassLoader, èƒ½loadåˆ°classpathä¸‹çš„æ–‡ä»¶, æ‰€ä»¥åªè¦èµ„æºæ–‡ä»¶åœ¨classpathä¸‹å°±èƒ½loadåˆ°.</p>
 <p><img src="classloader/client appclassloder.PNG" width="875" height="373" /></p>
-<p>Í¼Ò» ¿Í»§¶Ëclassloader</p>
+<p>å›¾ä¸€ å®¢æˆ·ç«¯classloader</p>
 <p>&nbsp;</p>
 <p><img src="classloader/client appclassloder1.PNG" alt="client" width="872" height="474" /></p>
-<p>Í¼¶ş ¿Í»§¶Ë classloader´ò¿ªÁ÷ÎÄ¼ş</p>
+<p>å›¾äºŒ å®¢æˆ·ç«¯ classloaderæ‰“å¼€æµæ–‡ä»¶</p>
 <p>&nbsp;</p>
-<p>2. ÔÚtomcatÀïÅÜ£¬loadµ±Ç°ÀàµÄÊÇWebappClassloaer£¬ËùÒÔthis.getClass().getClassLoader()µÃµ½µÄÒ²ÊÇ WebappClassloaer¡£</p>
-<p>getSystemResouceAsStream()Ã»ÓĞloadµ½×ÊÔ´ÎÄ¼ş£¬ »»³ÉgetResouceAsStream()ºóÄÜloadµ½¡£</p>
+<p>2. åœ¨tomcaté‡Œè·‘ï¼Œloadå½“å‰ç±»çš„æ˜¯WebappClassloaerï¼Œæ‰€ä»¥this.getClass().getClassLoader()å¾—åˆ°çš„ä¹Ÿæ˜¯ WebappClassloaerã€‚</p>
+<p>getSystemResouceAsStream()æ²¡æœ‰loadåˆ°èµ„æºæ–‡ä»¶ï¼Œ æ¢æˆgetResouceAsStream()åèƒ½loadåˆ°ã€‚</p>
 <p>&nbsp;</p>
 <p><img src="classloader/server WebappClassloader.PNG" alt="server" width="877" height="536" /></p>
-<p>Í¼Èı. clzloaderÃ»¼ÓÔØµ½ÎÄ¼ş£¬ inputÊÇnull </p>
+<p>å›¾ä¸‰. clzloaderæ²¡åŠ è½½åˆ°æ–‡ä»¶ï¼Œ inputæ˜¯null </p>
 <p>&nbsp;</p>
 <p><img src="classloader/server WebappClassloader1.PNG" width="884" height="572" /></p>
-<p>Í¼ËÄ. clzloaderÔÚ/WEB-INF/classse/ÏÂ¼ÓÔØµ½ÁËÎÄ¼ş</p>
+<p>å›¾å››. clzloaderåœ¨/WEB-INF/classse/ä¸‹åŠ è½½åˆ°äº†æ–‡ä»¶</p>
 </body>
 </html>
