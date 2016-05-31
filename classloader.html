@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<h1>Classloader 相关的问题
+</h1>
+<p>一. 背景</p>
+<p> 同一段代码在服务框架的服务端和客户端里重用, 客户端里classloader能load到资源文件, 但是服务端代码部署在tomcat容器里, classloader不能load到资源文件.</p>
+<p>看来代码有个bug.直接上代码:</p>
+<p>二.代码 </p>
+<p>1. 看到客户端里的classloader是AppClassLoader, 能load到classpath下的文件, 所以只要资源文件在classpath下就能load到.</p>
+<p><img src="client appclassloder.PNG" width="905" height="438" /></p>
+<p>图一 客户端classloader</p>
+<p>&nbsp;</p>
+<p><img src="client appclassloder1.PNG" alt="客户端url" width="914" height="524" /></p>
+<p>图二 客户端 classloader打开流文件</p>
+<p>2. 在tomcat里跑，load当前类的是WebappClassloaer，所以this.getClass().getClassLoader()得到的也是 WebappClassloaer。</p>
+<p>getSystemResouceAsStream()没有load到资源文件， 换成getResouceAsStream()后能load到。</p>
+<p>&nbsp;</p>
+<p><img src="server WebappClassloader.PNG" alt="服务端classloader" width="864" height="511" /></p>
+<p>图三. clzloader没加载到文件， input是null </p>
+<p><img src="server WebappClassloader1.PNG" width="876" height="463" /></p>
+<p>&nbsp;</p>
+<p>图四. clzloader在/WEB-INF/classse/下加载到了文件</p>
+</body>
+</html>
