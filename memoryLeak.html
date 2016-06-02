@@ -1,0 +1,42 @@
+﻿<h2><strong>内存泄漏及其解决方案</strong></h2>
+<p>如果一个可达对象的生命周期很长，它有一个生命周期较短的对象引用，此时就可能出现Java内存泄漏。也即是说， 造成内存泄漏的原因是对象虽然可达但不是活动的。</p>
+<p>&nbsp;</p>
+<h3>避免内存泄漏的三种方式  </h3>
+<h4>1. 软引用  </h4>
+<p>对于缓存，如果没有合适的策略让老的缓存项目到期就可能遇到内存泄漏。</p>
+<p>我们希望缓存能用上所有的可用内存，只是在需要额外资源的时候才释放资源。 通过软可达可以实现资源的释放。</p>
+<p>释放软可达对象的规则：  </p>
+<p>I. gc抛出OOM异常之前要尝试释放软引用  </p>
+<p>II. gc以LRU的顺序释放软引用  </p>
+<p>举例：</p>
+<p>Google LoadingCache中的CacheBuilder.softValues()</p>
+<p>&nbsp; </p>
+<h4>2.  弱引用</h4>
+<p>弱引用可以用于协助垃圾回收， 这是通用的解决方案。</p>
+<p>举例：
+  threadLocal </p>
+<p><img src="memoryLeak/threadLocal.jpg" alt="threadLocal" width="714" height="403" /></p>
+<p>每个线程中有一个Map, 这个Map的类型是ThreadLocal.ThreadLocalMap.   Map中的key为一个threadlocal实例. 这个Map的key使用了弱引用。    每个key都弱引用指向threadlocal.   当把threadlocal实例置为null以后,没有任何强引用指向threadlocal实例,所以threadlocal将会被gc回收.</p>
+<p>ps:  value却不能回收,因为存在一条从current thread连接过来的强引用. 只有当前thread结束以后, current   thread就不会存在栈中,强引用断开, Current Thread, Map, value将全部被GC回收. 如果使用线程池，线程的强引用会长时间的存在，为了防止内存泄漏，最好的做法是将调用threadlocal的remove方法。</p>
+<h4>3. 打开(增加)和关闭（删除）方法成对出现</h4>
+<p>资源申请和回收不成对会使资源没释放，造成内存泄漏。</p>
+<p>举例： </p>
+<p>I. 在finally块中关闭打开的资源和异常处理。</p>
+<p>II.  使用try-with-resources语句（Java SE7新特性）</p>
+<div>
+  <div></div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><div>1<br />
+        2<br />
+        3<br />
+      </div></td>
+      <td><div></div></td>
+      <td><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;(BufferedReader&nbsp;br&nbsp;=&nbsp;new&nbsp;BufferedReader(new&nbsp;FileReader(path)))&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;br.readLine();<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp; </p>
+<p>&nbsp;</p>
