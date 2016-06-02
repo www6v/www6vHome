@@ -1,0 +1,172 @@
+<h1><strong>单例总结</strong></h1>
+<p>可以分成两类： 多线程安全和非多线程安全的单例</p>
+<p><strong>一. 多线程安全 </strong></p>
+<p>
+  <!-- CoolFormat Source Formatter http://blog.csdn.net/akof1314 -->
+  1 .
+initialization-on-demand&nbsp;holder&nbsp;idiom(IODH)</p>
+<div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><div>1<br />
+        2<br />
+        3<br />
+        4<br />
+        5<br />
+        6<br />
+        7<br />
+        8<br />
+        9<br />
+        10<br />
+        11<br />
+        12<br />
+        13<br />
+        14<br />
+        15<br />
+      </div></td>
+      <td><div></div></td>
+      <td><div><br />
+        //&nbsp;用内部类的机制实现了延时加载和线程安全<br />
+        public&nbsp;class&nbsp;Singleton&nbsp;{<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Singleton()&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;};<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;class&nbsp;SingletonHolder&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;Singleton&nbsp;INSTANCE&nbsp;=&nbsp;new&nbsp;Singleton();<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;Singleton&nbsp;getInstance()&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;SingletonHolder.INSTANCE;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        }</div></td>
+    </tr>
+  </table>
+</div>
+<p>2. 通过枚举实现</p>
+<div>
+  <div></div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><div>1<br />
+        2<br />
+        3<br />
+      </div></td>
+      <td><div></div></td>
+      <td><div>public&nbsp;enum&nbsp;EnumSingleton&nbsp;implements&nbsp;Serializable&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTANCE;<br />
+        }</div></td>
+    </tr>
+  </table>
+</div>
+<p>3.  double check模式</p>
+<div>
+  <div></div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><div>1<br />
+        2<br />
+        3<br />
+        4<br />
+        5<br />
+        6<br />
+        7<br />
+        8<br />
+        9<br />
+        10<br />
+        11<br />
+        12<br />
+        13<br />
+        14<br />
+        15<br />
+        16<br />
+        17<br />
+      </div></td>
+      <td><div></div></td>
+      <td><div>public&nbsp;class&nbsp;Singleton&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;volatile&nbsp;static&nbsp;Singleton&nbsp;singleton;<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Singleton()&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;Singleton&nbsp;getSingleton()&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(singleton&nbsp;==&nbsp;null)&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized&nbsp;(Singleton.class)&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(singleton&nbsp;==&nbsp;null)&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleton&nbsp;=&nbsp;new&nbsp;Singleton();<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;singleton;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        }</div></td>
+    </tr>
+  </table>
+</div>
+<p><strong>二. 非多线程安全</strong></p>
+<p>
+  <!-- CoolFormat Source Formatter http://blog.csdn.net/akof1314 --> 1.  lazy load模式
+</p>
+<div>
+  <div></div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><div>1<br />
+        2<br />
+        3<br />
+        4<br />
+        5<br />
+        6<br />
+        7<br />
+        8<br />
+        9<br />
+        10<br />
+        11<br />
+      </div></td>
+      <td><div></div></td>
+      <td><div>public&nbsp;class&nbsp;Singleton&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;Singleton&nbsp;instance;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Singleton&nbsp;(){}<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;Singleton&nbsp;getInstance()&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(instance&nbsp;==&nbsp;null)&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instance&nbsp;=&nbsp;new&nbsp;Singleton();<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;instance;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        }</div></td>
+    </tr>
+  </table>
+</div>
+<p>2. 非lazy load模式</p>
+<div>
+  <div></div>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><div>1<br />
+        2<br />
+        3<br />
+        4<br />
+        5<br />
+        6<br />
+        7<br />
+        8<br />
+        9<br />
+        10<br />
+      </div></td>
+      <td><div></div></td>
+      <td><div>public&nbsp;class&nbsp;Singleton&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;Singleton&nbsp;instance&nbsp;=&nbsp;new&nbsp;Singleton();<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Singleton()&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;Singleton&nbsp;getInstance()&nbsp;{<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;instance;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+        }</div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
