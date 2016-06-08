@@ -1,0 +1,20 @@
+<h1 align="center">线上不能下单问题排查</h1>
+<p>&nbsp;</p>
+<p>2016.6.7号，整个jso订单都不能下单，数据库的链接从4000降到几百， 只能重启所有的服务，并保留一个机器做thread dump。 </p>
+<p>重启后数据库链接涨到了2000多，下单基本能用。</p>
+<p>运维开始以为是数据库超时引起的整个服务线程夯住，排查下来是ibatis流控的线程里没有做同步的通知（notify），导致所有的线程都lock在同一把锁上并做wait。</p>
+<p>&nbsp;</p>
+<p><img src="mybatisBug/thread dump.JPG" alt="threadDump" width="1077" height="659" /></p>
+<p>图1： thread dump中大量的WAITING (on object monitor)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="mybatisBug/mybatisThrottleWait.JPG" alt="mybatisThrottleWait.JPG" width="1083" height="621" /></p>
+<p>图二： 线程wait</p>
+<p>&nbsp;</p>
+<p><img src="mybatisBug/mybatisThrottleNotify.JPG" alt="mybatisThrottleNotify.JPG" width="1070" height="617" /></p>
+<p>图三： 线程notify -- 没有做</p>
+<p>&nbsp;</p>
+<p><img src="mybatisBug/throttlePool.JPG" alt="throttlePool.JPG" width="1040" height="644" /></p>
+<p>图四： pop和push</p>
+<p>解决方案： Throttle类是公司自己封装的ibatis版本，存在这个bug，估计是高并发的时候只调用了pop方法，其他线程还来不及调用push，所有的线程都夯住了。 </p>
+<p>解决这个问题很简单，升级ibatis版本到3.X.X。</p>
