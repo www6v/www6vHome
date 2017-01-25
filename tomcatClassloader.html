@@ -1,31 +1,31 @@
-<p><strong>? ?????????????????????????????</strong><strong><h1>?????Tomcat Classloader</h1></strong></p>
-<h3>Ò». Õâ´ÎÕë¶Ô¹²ÏíjarÄ¿Â¼¶Ôtomcat classloaderµ÷ÑĞ£¬´ó¸ÅÓĞÒÔÏÂÁ½ÖÖ½â¾ö·½°¸¡£</h3>
-<h3>¶ş. Tomcat6.x+ ÏòÇ°¼æÈİĞÔ ºÍ Delegate¡°¿ª¹Ø¡±</h3>
-<h3>Tomcat6.x+  ÏòÇ°¼æÈİĞÔ </h3>
-<h3>Ô­Àí£ºtomcat6.x+ÎªÁËÓÃ»§µÄÊ¹ÓÃ¼ò»¯ÁËtomcat5.xµÄclassloaderÄ£ĞÍ£¬µ«ÓÃ»§Ò²ÄÜÍ¨¹ıĞŞ¸ÄÅäÖÃÖĞµÄserver.loaderºÍshared.loaderÖØĞÂÆôÓÃ5.xµÄ¼ÓÔØÆ÷½á¹¹¡£ </h3>
-<h3>server.loaderÏÂµÄjarÎÄ¼şÖ»ÄÜÓÉtomcat·ÃÎÊ£¬ ¶ÔÓ¦ÓÃ²»¿É¼û¡£ </h3>
-<h3>shared.loaderÏÂµÄjarÎÄ¼şÄÜ±»¸÷¸öÓ¦ÓÃ¹²Ïí·ÃÎÊ£¬¶Ôtomcat²»¿É¼û¡£ </h3>
-<h3>ÅäÖÃ£º </h3>
-<h3>catalina.properitesÖĞµÄserver.loaderºÍshared.loader£¬ ÅäÖÃÎªjarËùÔÚµÄÄ¿Â¼ </h3>
-<h3>´úÂë£º </h3>
+ï»¿<p><strong>? ?????????????????????????????</strong><strong><h1>?????Tomcat Classloader</h1></strong></p>
+<h3>ä¸€. è¿™æ¬¡é’ˆå¯¹å…±äº«jarç›®å½•å¯¹tomcat classloaderè°ƒç ”ï¼Œå¤§æ¦‚æœ‰ä»¥ä¸‹ä¸¤ç§è§£å†³æ–¹æ¡ˆã€‚</h3>
+<h3>äºŒ. Tomcat6.x+ å‘å‰å…¼å®¹æ€§ å’Œ Delegateâ€œå¼€å…³â€</h3>
+<h3>Tomcat6.x+  å‘å‰å…¼å®¹æ€§ </h3>
+<h3>åŸç†ï¼štomcat6.x+ä¸ºäº†ç”¨æˆ·çš„ä½¿ç”¨ç®€åŒ–äº†tomcat5.xçš„classloaderæ¨¡å‹ï¼Œä½†ç”¨æˆ·ä¹Ÿèƒ½é€šè¿‡ä¿®æ”¹é…ç½®ä¸­çš„server.loaderå’Œshared.loaderé‡æ–°å¯ç”¨5.xçš„åŠ è½½å™¨ç»“æ„ã€‚ </h3>
+<h3>server.loaderä¸‹çš„jaræ–‡ä»¶åªèƒ½ç”±tomcatè®¿é—®ï¼Œ å¯¹åº”ç”¨ä¸å¯è§ã€‚ </h3>
+<h3>shared.loaderä¸‹çš„jaræ–‡ä»¶èƒ½è¢«å„ä¸ªåº”ç”¨å…±äº«è®¿é—®ï¼Œå¯¹tomcatä¸å¯è§ã€‚ </h3>
+<h3>é…ç½®ï¼š </h3>
+<h3>catalina.properitesä¸­çš„server.loaderå’Œshared.loaderï¼Œ é…ç½®ä¸ºjaræ‰€åœ¨çš„ç›®å½• </h3>
+<h3>ä»£ç ï¼š </h3>
 <h3><img src="tomcatClassloader\tomcat classloader_clip_image002.jpg" alt="1" width="554" height="220" /> </h3>
-<h3>Delegate¡°¿ª¹Ø¡± </h3>
-<h3>Ô­Àí£ºtomcat6x+ºóÄ¬ÈÏDelegateÎªfalse£¬ÒâÎ¶ÊÇ´òÆÆjavaÄ¬ÈÏµÄË«Ç×Î¯ÅÉ¹æÔòµÄ¡£Ò²¾ÍÊÇËµÄ¬ÈÏÊÇchild firstµÄ£¬ ÏÈ¼ÓÔØwebapp×ÔÉíµÄjarÎÄ¼ş¡£Èç¹ûÖÃDelegate=true,ÓÅÏÈÎ¯ÅÉË«Ç×¼ÓÔØ£¨parent first£©¡£ </h3>
-<h3>ÅäÖÃ£º </h3>
-<h3>1.Defining a context£¨3ÖĞ·½Ê½£¬Á½ÖÖ·½Ê½ÂÔ£© </h3>
+<h3>Delegateâ€œå¼€å…³â€ </h3>
+<h3>åŸç†ï¼štomcat6x+åé»˜è®¤Delegateä¸ºfalseï¼Œæ„å‘³æ˜¯æ‰“ç ´javaé»˜è®¤çš„åŒäº²å§”æ´¾è§„åˆ™çš„ã€‚ä¹Ÿå°±æ˜¯è¯´é»˜è®¤æ˜¯child firstçš„ï¼Œ å…ˆåŠ è½½webappè‡ªèº«çš„jaræ–‡ä»¶ã€‚å¦‚æœç½®Delegate=true,ä¼˜å…ˆå§”æ´¾åŒäº²åŠ è½½ï¼ˆparent firstï¼‰ã€‚ </h3>
+<h3>é…ç½®ï¼š </h3>
+<h3>1.Defining a contextï¼ˆ3ä¸­æ–¹å¼ï¼Œä¸¤ç§æ–¹å¼ç•¥ï¼‰ </h3>
 <h3>Inside a Host element in the main  conf/server.xml.</h3>
 <h3>2.&lt;Loader  delegate=&quot;true&quot;/&gt;</h3>
 <h3><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/loader.html"><strong>Loader</strong></a> -  Configure the web application class loader that will be used to load servlet  and bean classes for this web application. Normally, the default configuration  of the class loader will be sufficient. </h3>
-<h3>Eg. &lt;context docBase=&quot;¡­&quot;&gt;  &lt;Loader delegate=&quot;true&quot; /&gt; ¡­ &lt;/context&gt; </h3>
-<h3>×¢Òâµã£º </h3>
-<h3>1. Tomcat6.X ºÍTomcat7. X£¬8. XµÄ¼ÓÔØË³ĞòÓĞÒ»µã²»Í¬ </h3>
-<h3>Ô´´úÂë£º WebappClassLoader.loadClass ?</h3>
-<h3>1£©7. X±È6. X¶à²¢·¢load classµÄ¹¦ÄÜ¡£ </h3>
-<h3>2) 7. XÀï Bootstrap classLoaderÏÈ¼ÓÔØclass£¬ 6. XÀï System classLoaderÏÈ¼ÓÔØclass </h3>
+<h3>Eg. &lt;context docBase=&quot;â€¦&quot;&gt;  &lt;Loader delegate=&quot;true&quot; /&gt; â€¦ &lt;/context&gt; </h3>
+<h3>æ³¨æ„ç‚¹ï¼š </h3>
+<h3>1. Tomcat6.X å’ŒTomcat7. Xï¼Œ8. Xçš„åŠ è½½é¡ºåºæœ‰ä¸€ç‚¹ä¸åŒ </h3>
+<h3>æºä»£ç ï¼š WebappClassLoader.loadClass ?</h3>
+<h3>1ï¼‰7. Xæ¯”6. Xå¤šå¹¶å‘load classçš„åŠŸèƒ½ã€‚ </h3>
+<h3>2) 7. Xé‡Œ Bootstrap classLoaderå…ˆåŠ è½½classï¼Œ 6. Xé‡Œ System classLoaderå…ˆåŠ è½½class </h3>
 <h3><img src="tomcatClassloader\tomcat classloader_clip_image004.jpg" alt="2" width="554" height="203" border="0" /> </h3>
 <h3><img src="tomcatClassloader\tomcat classloader_clip_image006.jpg" alt="3" width="554" height="210" border="0" /> </h3>
 <h3>Tomcat6.X</h3>
-<h3>Delegate=false µÄ¼ÓÔØË³Ğò </h3>
+<h3>Delegate=false çš„åŠ è½½é¡ºåº </h3>
 <ul type="disc">
   <li>Bootstrap classes of your       JVM</li>
   <li>System class loader       classes </li>
@@ -33,7 +33,7 @@
   <li><strong><em>/WEB-INF/lib/*.jar</em></strong><strong> of       your web application</strong></li>
   <li>Common class loader       classes </li>
 </ul>
-<h3>Delegate=true µÄ¼ÓÔØË³Ğò </h3>
+<h3>Delegate=true çš„åŠ è½½é¡ºåº </h3>
 <ul type="disc">
   <li>Bootstrap classes of your       JVM</li>
   <li>System class loader       classes </li>
@@ -42,8 +42,8 @@
   <li><strong><em>/WEB-INF/lib/*.jar</em></strong><strong> of       your web application</strong></li>
 </ul>
 <p align="left"><strong>&nbsp;</strong></p>
-<h3>Tomcat7.X£¬8.X </h3>
-<h3>Delegate=false µÄ¼ÓÔØË³Ğò </h3>
+<h3>Tomcat7.Xï¼Œ8.X </h3>
+<h3>Delegate=false çš„åŠ è½½é¡ºåº </h3>
 <ul type="disc">
   <li>Bootstrap classes of your       JVM</li>
   <li><strong><em>/WEB-INF/classes</em></strong><strong> of       your web application</strong></li>
@@ -51,7 +51,7 @@
   <li>System class loader       classes </li>
   <li>Common class loader       classes </li>
 </ul>
-<h3>Delegate=true µÄ¼ÓÔØË³Ğò </h3>
+<h3>Delegate=true çš„åŠ è½½é¡ºåº </h3>
 <ul type="disc">
   <li>Bootstrap classes of your       JVM</li>
   <li>System class loader       classes (described above)</li>
@@ -59,19 +59,19 @@
   <li><strong><em>/WEB-INF/classes</em></strong><strong> of       your web application</strong></li>
   <li><strong><em>/WEB-INF/lib/*.jar</em></strong><strong> of       your web application</strong></li>
 </ul>
-<p>2. packageTriggers±äÁ¿</p>
+<p>2. packageTriggerså˜é‡</p>
 <p align="left"><img src="tomcatClassloader\tomcat classloader_clip_image008.jpg" alt="4" width="554" height="121" border="0" /> <br />
     <img src="tomcatClassloader\tomcat classloader_clip_image009.png" alt="5" width="513" height="45" border="0" />?</p>
 <p align="left"><img src="tomcatClassloader\tomcat classloader_clip_image011.jpg" alt="6" width="554" height="425" border="0" />? </p>
-<h3>packageTriggers£¬Ö´ĞĞchild firstÊ±£¬ÅÅ³ıµÄpackageÁĞ±í£¬Èç¹ûÆ¥ÅäÁËpackage£¬¼´Ê±Îªdelegate=false£¬Ò²»áÓÅÏÈÖ´ĞĞparent first²ßÂÔ¡£ </h3>
-<h3>µ«ÊÇÕâ¸ö±äÁ¿Ã»ÓĞ×÷ÎªtomcatÅäÖÃÏî£¬ Õâ¸ö¹¦ÄÜÃ»ÓĞ±©Â¶³öÀ´¡£ </h3>
+<h3>packageTriggersï¼Œæ‰§è¡Œchild firstæ—¶ï¼Œæ’é™¤çš„packageåˆ—è¡¨ï¼Œå¦‚æœåŒ¹é…äº†packageï¼Œå³æ—¶ä¸ºdelegate=falseï¼Œä¹Ÿä¼šä¼˜å…ˆæ‰§è¡Œparent firstç­–ç•¥ã€‚ </h3>
+<h3>ä½†æ˜¯è¿™ä¸ªå˜é‡æ²¡æœ‰ä½œä¸ºtomcaté…ç½®é¡¹ï¼Œ è¿™ä¸ªåŠŸèƒ½æ²¡æœ‰æš´éœ²å‡ºæ¥ã€‚ </h3>
 <h3>&nbsp;</h3>
-<h3>Èı. WebappClassLoader¼ÓÔØÖ¸¶¨Ä¿Â¼µÄjarÎÄ¼ş </h3>
-<h3>Ã¿¸öÓ¦ÓÃ¿ÉÒÔ¼ÓÔØÖ¸¶¨Ä¿Â¼µÄjar£¬ËäÈ»Áé»î£¬µ«ÊÇÅäÖÃÏà¶Ô¸´ÔÓ£¬¶ÔÓ¦ÓÃµÄÈëÇÖĞÔ±È½Ï´ó£¬²»ÍÆ¼öÊ¹ÓÃ¡£  ¾ßÌå¼û²Î¿¼ÎÄµµ¡£ </h3>
-<h3>×Ü½á£º tomcat6x+ ÏòÇ°¼æÈİĞÔ ºÍ Delegate¡°¿ª¹Ø¡±ÕâÖÖ·½Ê½¶ÔÓ¦ÓÃµÄÈëÇÖĞÔ±È½ÏĞ¡£¬Ó¦ÓÃ¸Ä¶¯±È½ÏÉÙ¡£ </h3>
+<h3>ä¸‰. WebappClassLoaderåŠ è½½æŒ‡å®šç›®å½•çš„jaræ–‡ä»¶ </h3>
+<h3>æ¯ä¸ªåº”ç”¨å¯ä»¥åŠ è½½æŒ‡å®šç›®å½•çš„jarï¼Œè™½ç„¶çµæ´»ï¼Œä½†æ˜¯é…ç½®ç›¸å¯¹å¤æ‚ï¼Œå¯¹åº”ç”¨çš„å…¥ä¾µæ€§æ¯”è¾ƒå¤§ï¼Œä¸æ¨èä½¿ç”¨ã€‚  å…·ä½“è§å‚è€ƒæ–‡æ¡£ã€‚ </h3>
+<h3>æ€»ç»“ï¼š tomcat6x+ å‘å‰å…¼å®¹æ€§ å’Œ Delegateâ€œå¼€å…³â€è¿™ç§æ–¹å¼å¯¹åº”ç”¨çš„å…¥ä¾µæ€§æ¯”è¾ƒå°ï¼Œåº”ç”¨æ”¹åŠ¨æ¯”è¾ƒå°‘ã€‚ </h3>
 <p>&nbsp;</p>
-<h3>¸½£ºÑéÖ¤ detector:</h3>
-<h3>Delegate  Ã»ÅäÖÃ£¬ shared Ä¿Â¼ÅäÖÃÁË </h3>
+<h3>é™„ï¼šéªŒè¯ detector:</h3>
+<h3>Delegate  æ²¡é…ç½®ï¼Œ shared ç›®å½•é…ç½®äº† </h3>
 <h3>$jmap -permstat 5440 | grep live</h3>
 <h3>$......</h3>
 <h3>computing per loader stat ..done.</h3>
@@ -88,7 +88,7 @@
 <h3>total = 37????? 8951???  55792808??????????? N/A???????? alive=8, dead=29??????????? N/A</h3>
 <h3>&nbsp;</h3>
 <h3><img src="tomcatClassloader\tomcat classloader_clip_image013.jpg" alt="7" width="553" height="60" border="0" /> </h3>
-<h3>Delegate  ÅäÖÃÁË£¬ shared Ä¿Â¼ÅäÖÃÁË </h3>
+<h3>Delegate  é…ç½®äº†ï¼Œ shared ç›®å½•é…ç½®äº† </h3>
 <h3>computing per loader stat ..done.</h3>
 <h3>please wait.. computing  liveness..............done.</h3>
 <h3>class_loader??? classes bytes?? parent_loader?? alive??  type</h3>
@@ -103,16 +103,16 @@
 <h3>&nbsp;</h3>
 <h3><img src="tomcatClassloader\tomcat classloader_clip_image015.jpg" alt="8" width="554" height="40" border="0" /> </h3>
 <p>&nbsp;</p>
-<p><strong>²Î¿¼£º</strong><strong> </strong><br />
+<p><strong>å‚è€ƒï¼š</strong><strong> </strong><br />
   1. <a href="http://tomcat.apache.org/tomcat-6.0-doc/config/loader.html">http://tomcat.apache.org/tomcat-6.0-doc/config/loader.html</a> ?The  Loader Component<br />
   2. <a href="http://tomcat.apache.org/tomcat-7.0-doc/config/context.html">http://tomcat.apache.org/tomcat-7.0-doc/config/context.html</a>? The  Context Container<br />
   3. <a href="http://agapple.iteye.com/blog/826661">http://agapple.iteye.com/blog/826661</a> ?<br />
-  Ö÷Á÷webÈİÆ÷(jetty,tomcat,jboss)µÄclassloader»úÖÆ¶Ô±ÈºÍÏà¹ØÎÊÌâ·ÖÎö <br />
-  4. <a href="http://blog.csdn.net/fjslovejhl/article/details/21328347">http://blog.csdn.net/fjslovejhl/article/details/21328347</a>? TomcatÔ´Âë·ÖÎöÖ®ClassLoader²¿·ÖµÄÉè¼ÆÏêÏ¸·ÖÎö tomcat8.0<br />
-  5. <a href="http://www.blogjava.net/heavensay/archive/2012/11/07/389685.html">http://www.blogjava.net/heavensay/archive/2012/11/07/389685.html</a>?  classĞ¶ÔØ¡¢ÈÈÌæ»»ºÍTomcatµÄÈÈ²¿ÊğµÄ·ÖÎö <br />
-  6. <a href="http://dncsoft.iteye.com/blog/336871">http://dncsoft.iteye.com/blog/336871</a>?  Ó¦ÓÃTomcatµÄWebappClassLoader¼ÓÔØÖ¸¶¨Ä¿Â¼µÄjarÎÄ¼ş <br />
-  7. tomcat6.0ºÍ7.0µÄÔ´´úÂë </p>
+  ä¸»æµwebå®¹å™¨(jetty,tomcat,jboss)çš„classloaderæœºåˆ¶å¯¹æ¯”å’Œç›¸å…³é—®é¢˜åˆ†æ <br />
+  4. <a href="http://blog.csdn.net/fjslovejhl/article/details/21328347">http://blog.csdn.net/fjslovejhl/article/details/21328347</a>? Tomcatæºç åˆ†æä¹‹ClassLoaderéƒ¨åˆ†çš„è®¾è®¡è¯¦ç»†åˆ†æ tomcat8.0<br />
+  5. <a href="http://www.blogjava.net/heavensay/archive/2012/11/07/389685.html">http://www.blogjava.net/heavensay/archive/2012/11/07/389685.html</a>?  classå¸è½½ã€çƒ­æ›¿æ¢å’ŒTomcatçš„çƒ­éƒ¨ç½²çš„åˆ†æ <br />
+  6. <a href="http://dncsoft.iteye.com/blog/336871">http://dncsoft.iteye.com/blog/336871</a>?  åº”ç”¨Tomcatçš„WebappClassLoaderåŠ è½½æŒ‡å®šç›®å½•çš„jaræ–‡ä»¶ <br />
+  7. tomcat6.0å’Œ7.0çš„æºä»£ç  </p>
 <p>&nbsp;</p>
-<p>Btw£º <strong>WatchedResource</strong> - The auto deployer will monitor the specified static resource of  the web application for updates, and will reload the web application if it is  updated. The content of this element must be a string.</p>
+<p>Btwï¼š <strong>WatchedResource</strong> - The auto deployer will monitor the specified static resource of  the web application for updates, and will reload the web application if it is  updated. The content of this element must be a string.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
