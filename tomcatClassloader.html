@@ -1,4 +1,7 @@
-﻿<p><strong>? ?????????????????????????????</strong><strong><h1>?????Tomcat Classloader</h1></strong></p>
+﻿<p>
+<strong>
+<h1>Tomcat Classloader</h1>
+</strong>
 <h3>一. 这次针对共享jar目录对tomcat classloader调研，大概有以下两种解决方案。</h3>
 <h3>二. Tomcat6.x+ 向前兼容性 和 Delegate“开关”</h3>
 <h3>Tomcat6.x+  向前兼容性 </h3>
@@ -76,32 +79,32 @@
 <h3>$......</h3>
 <h3>computing per loader stat ..done.</h3>
 <h3>please wait.. computing  liveness.............liveness analysis may be inaccurate ...</h3>
-<h3>class_loader??? classes bytes?? parent_loader?? alive??  type</h3>
-<h3>&lt;bootstrap&gt;???? 2503???  14928832????????? null????????? live??? &lt;internal&gt;</h3>
-<h3>0x00000007683850b0????? 0??????  0?????? 0x0000000767ae9360????? live???  java/net/URLClassLoader@0x00000007621eb548</h3>
-<h3>0x0000000767b3b2a8????? 578????  4855184 0x0000000767ae9360?????  live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538</h3>
-<h3>0x0000000767b7ab00????? 0??????  0?????? 0x0000000767b3b2a8????? live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538</h3>
-<h3>0x0000000767ae93b0????? 77?????  466376??? null????????? live??? sun/misc/Launcher$ExtClassLoader@0x00000007621eb958</h3>
-<h3>0x0000000767b7aa48????? 5712???  34794416???????  0x0000000767b7ab00????? live???  org/apache/catalina/loader/WebappClassLoader@0x0000000762b712f8</h3>
-<h3>0x0000000767ae9360????? 52?????  659816? 0x0000000767ae93b0????? live???  sun/misc/Launcher$AppClassLoader@0x0000000762241680</h3>
-<h3>0x00000007673df848????? 0??????  0?????? 0x0000000767ae9360????? live???  java/util/ResourceBundle$RBClassLoader@0x0000000762498f90</h3>
-<h3>total = 37????? 8951???  55792808??????????? N/A???????? alive=8, dead=29??????????? N/A</h3>
+<h3>class_loader    classes bytes   parent_loader   alive?   type</h3>
+<h3>&lt;bootstrap&gt;     2503     14928832          null          live    &lt;internal&gt;</h3>
+<h3>0x00000007683850b0      0        0       0x0000000767ae9360      live     java/net/URLClassLoader@0x00000007621eb548</h3>
+<h3>0x0000000767b3b2a8      578      4855184 0x0000000767ae9360       live     org/apache/catalina/loader/StandardClassLoader@0x0000000762315538</h3>
+<h3>0x0000000767b7ab00      0        0       0x0000000767b3b2a8      live     org/apache/catalina/loader/StandardClassLoader@0x0000000762315538</h3>
+<h3>0x0000000767ae93b0      77       466376    null          live    sun/misc/Launcher$ExtClassLoader@0x00000007621eb958</h3>
+<h3>0x0000000767b7aa48      5712     34794416         0x0000000767b7ab00      live     org/apache/catalina/loader/WebappClassLoader@0x0000000762b712f8</h3>
+<h3>0x0000000767ae9360      52       659816  0x0000000767ae93b0      live     sun/misc/Launcher$AppClassLoader@0x0000000762241680</h3>
+<h3>0x00000007673df848      0        0       0x0000000767ae9360      live     java/util/ResourceBundle$RBClassLoader@0x0000000762498f90</h3>
+<h3>total = 37      8951     55792808            N/A         alive=8, dead=29            N/A</h3>
 <h3>&nbsp;</h3>
-<h3><img src="tomcatClassloader/tomcat classloader_clip_image013.jpg" alt="7" width="553" height="60" border="0" /> </h3>
+<h3><img src="tomcatClassloader/tomcatClassloader_clip_image002_0000.jpg" alt="1" width="553" height="60" /> </h3>
 <h3>Delegate  配置了， shared 目录配置了 </h3>
 <h3>computing per loader stat ..done.</h3>
 <h3>please wait.. computing  liveness..............done.</h3>
-<h3>class_loader??? classes bytes?? parent_loader?? alive??  type</h3>
-<h3>&lt;bootstrap&gt;???? 2482???  14861184????????? null????????? live??? &lt;internal&gt;</h3>
-<h3>0x0000000768da77d8????? 77?????  466376??? null????????? live???  sun/misc/Launcher$ExtClassLoader@0x00000007621eb958 --</h3>
-<h3>0x0000000768da7788????? 52?????  659816? 0x0000000768da77d8????? live???  sun/misc/Launcher$AppClassLoader@0x0000000762241680 --</h3>
-<h3>0x000000076892ffd0????? 0??????  0?????? 0x0000000768da7788????? live???  java/util/ResourceBundle$RBClassLoader@0x0000000762498f90</h3>
-<h3>0x0000000768da76e8????? 0??????  0?????? 0x0000000768da7738????? live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538 --</h3>
-<h3>0x0000000768da7738????? 556????  4709744 0x0000000768da7788?????  live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538 --</h3>
-<h3>0x0000000768da7630????? 5200???  31904816???????  0x0000000768da76e8????? live???  org/apache/catalina/loader/WebappClassLoader@0x00000007628c7588 --</h3>
-<h3>total = 35????? 8395???  52687048??????????? N/A???????? alive=7, dead=28??????????? N/A</h3>
+<h3>class_loader    classes bytes   parent_loader   alive?   type</h3>
+<h3>&lt;bootstrap&gt;     2482     14861184          null          live    &lt;internal&gt;</h3>
+<h3>0x0000000768da77d8      77       466376    null          live     sun/misc/Launcher$ExtClassLoader@0x00000007621eb958 --</h3>
+<h3>0x0000000768da7788      52       659816  0x0000000768da77d8      live     sun/misc/Launcher$AppClassLoader@0x0000000762241680 --</h3>
+<h3>0x000000076892ffd0      0        0       0x0000000768da7788      live     java/util/ResourceBundle$RBClassLoader@0x0000000762498f90</h3>
+<h3>0x0000000768da76e8      0        0       0x0000000768da7738      live     org/apache/catalina/loader/StandardClassLoader@0x0000000762315538 --</h3>
+<h3>0x0000000768da7738      556      4709744 0x0000000768da7788       live     org/apache/catalina/loader/StandardClassLoader@0x0000000762315538 --</h3>
+<h3>0x0000000768da7630      5200     31904816         0x0000000768da76e8      live     org/apache/catalina/loader/WebappClassLoader@0x00000007628c7588 --</h3>
+<h3>total = 35      8395     52687048            N/A         alive=7, dead=28            N/A</h3>
 <h3>&nbsp;</h3>
-<h3><img src="tomcatClassloader/tomcat classloader_clip_image015.jpg" alt="8" width="554" height="40" border="0" /> </h3>
+<h3><img src="tomcatClassloader/tomcatClassloader_clip_image004.jpg" alt="2" width="554" height="40" /> </h3>
 <p>&nbsp;</p>
 <p><strong>参考：</strong><strong> </strong><br />
   1. <a href="http://tomcat.apache.org/tomcat-6.0-doc/config/loader.html">http://tomcat.apache.org/tomcat-6.0-doc/config/loader.html</a> ?The  Loader Component<br />
