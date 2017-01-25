@@ -1,0 +1,118 @@
+<p><strong>? ?????????????????????????????</strong><strong><h1>?????Tomcat Classloader</h1></strong></p>
+<h3>一. 这次针对共享jar目录对tomcat classloader调研，大概有以下两种解决方案。</h3>
+<h3>二. Tomcat6.x+ 向前兼容性 和 Delegate“开关”</h3>
+<h3>Tomcat6.x+  向前兼容性 </h3>
+<h3>原理：tomcat6.x+为了用户的使用简化了tomcat5.x的classloader模型，但用户也能通过修改配置中的server.loader和shared.loader重新启用5.x的加载器结构。 </h3>
+<h3>server.loader下的jar文件只能由tomcat访问， 对应用不可见。 </h3>
+<h3>shared.loader下的jar文件能被各个应用共享访问，对tomcat不可见。 </h3>
+<h3>配置： </h3>
+<h3>catalina.properites中的server.loader和shared.loader， 配置为jar所在的目录 </h3>
+<h3>代码： </h3>
+<h3><img src="tomcatClassloader\tomcat classloader_clip_image002.jpg" alt="1" width="554" height="220" /> </h3>
+<h3>Delegate“开关” </h3>
+<h3>原理：tomcat6x+后默认Delegate为false，意味是打破java默认的双亲委派规则的。也就是说默认是child first的， 先加载webapp自身的jar文件。如果置Delegate=true,优先委派双亲加载（parent first）。 </h3>
+<h3>配置： </h3>
+<h3>1.Defining a context（3中方式，两种方式略） </h3>
+<h3>Inside a Host element in the main  conf/server.xml.</h3>
+<h3>2.&lt;Loader  delegate=&quot;true&quot;/&gt;</h3>
+<h3><a href="http://tomcat.apache.org/tomcat-7.0-doc/config/loader.html"><strong>Loader</strong></a> -  Configure the web application class loader that will be used to load servlet  and bean classes for this web application. Normally, the default configuration  of the class loader will be sufficient. </h3>
+<h3>Eg. &lt;context docBase=&quot;…&quot;&gt;  &lt;Loader delegate=&quot;true&quot; /&gt; … &lt;/context&gt; </h3>
+<h3>注意点： </h3>
+<h3>1. Tomcat6.X 和Tomcat7. X，8. X的加载顺序有一点不同 </h3>
+<h3>源代码： WebappClassLoader.loadClass ?</h3>
+<h3>1）7. X比6. X多并发load class的功能。 </h3>
+<h3>2) 7. X里 Bootstrap classLoader先加载class， 6. X里 System classLoader先加载class </h3>
+<h3><img src="tomcatClassloader\tomcat classloader_clip_image004.jpg" alt="2" width="554" height="203" border="0" /> </h3>
+<h3><img src="tomcatClassloader\tomcat classloader_clip_image006.jpg" alt="3" width="554" height="210" border="0" /> </h3>
+<h3>Tomcat6.X</h3>
+<h3>Delegate=false 的加载顺序 </h3>
+<ul type="disc">
+  <li>Bootstrap classes of your       JVM</li>
+  <li>System class loader       classes </li>
+  <li><strong><em>/WEB-INF/classes</em></strong><strong> of       your web application</strong></li>
+  <li><strong><em>/WEB-INF/lib/*.jar</em></strong><strong> of       your web application</strong></li>
+  <li>Common class loader       classes </li>
+</ul>
+<h3>Delegate=true 的加载顺序 </h3>
+<ul type="disc">
+  <li>Bootstrap classes of your       JVM</li>
+  <li>System class loader       classes </li>
+  <li>Common class loader       classes </li>
+  <li><strong><em>/WEB-INF/classes</em></strong><strong> of       your web application</strong></li>
+  <li><strong><em>/WEB-INF/lib/*.jar</em></strong><strong> of       your web application</strong></li>
+</ul>
+<p align="left"><strong>&nbsp;</strong></p>
+<h3>Tomcat7.X，8.X </h3>
+<h3>Delegate=false 的加载顺序 </h3>
+<ul type="disc">
+  <li>Bootstrap classes of your       JVM</li>
+  <li><strong><em>/WEB-INF/classes</em></strong><strong> of       your web application</strong></li>
+  <li><strong><em>/WEB-INF/lib/*.jar</em></strong><strong> of       your web application</strong></li>
+  <li>System class loader       classes </li>
+  <li>Common class loader       classes </li>
+</ul>
+<h3>Delegate=true 的加载顺序 </h3>
+<ul type="disc">
+  <li>Bootstrap classes of your       JVM</li>
+  <li>System class loader       classes (described above)</li>
+  <li>Common class loader       classes (described above)</li>
+  <li><strong><em>/WEB-INF/classes</em></strong><strong> of       your web application</strong></li>
+  <li><strong><em>/WEB-INF/lib/*.jar</em></strong><strong> of       your web application</strong></li>
+</ul>
+<p>2. packageTriggers变量</p>
+<p align="left"><img src="tomcatClassloader\tomcat classloader_clip_image008.jpg" alt="4" width="554" height="121" border="0" /> <br />
+    <img src="tomcatClassloader\tomcat classloader_clip_image009.png" alt="5" width="513" height="45" border="0" />?</p>
+<p align="left"><img src="tomcatClassloader\tomcat classloader_clip_image011.jpg" alt="6" width="554" height="425" border="0" />? </p>
+<h3>packageTriggers，执行child first时，排除的package列表，如果匹配了package，即时为delegate=false，也会优先执行parent first策略。 </h3>
+<h3>但是这个变量没有作为tomcat配置项， 这个功能没有暴露出来。 </h3>
+<h3>&nbsp;</h3>
+<h3>三. WebappClassLoader加载指定目录的jar文件 </h3>
+<h3>每个应用可以加载指定目录的jar，虽然灵活，但是配置相对复杂，对应用的入侵性比较大，不推荐使用。  具体见参考文档。 </h3>
+<h3>总结： tomcat6x+ 向前兼容性 和 Delegate“开关”这种方式对应用的入侵性比较小，应用改动比较少。 </h3>
+<p>&nbsp;</p>
+<h3>附：验证 detector:</h3>
+<h3>Delegate  没配置， shared 目录配置了 </h3>
+<h3>$jmap -permstat 5440 | grep live</h3>
+<h3>$......</h3>
+<h3>computing per loader stat ..done.</h3>
+<h3>please wait.. computing  liveness.............liveness analysis may be inaccurate ...</h3>
+<h3>class_loader??? classes bytes?? parent_loader?? alive??  type</h3>
+<h3>&lt;bootstrap&gt;???? 2503???  14928832????????? null????????? live??? &lt;internal&gt;</h3>
+<h3>0x00000007683850b0????? 0??????  0?????? 0x0000000767ae9360????? live???  java/net/URLClassLoader@0x00000007621eb548</h3>
+<h3>0x0000000767b3b2a8????? 578????  4855184 0x0000000767ae9360?????  live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538</h3>
+<h3>0x0000000767b7ab00????? 0??????  0?????? 0x0000000767b3b2a8????? live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538</h3>
+<h3>0x0000000767ae93b0????? 77?????  466376??? null????????? live??? sun/misc/Launcher$ExtClassLoader@0x00000007621eb958</h3>
+<h3>0x0000000767b7aa48????? 5712???  34794416???????  0x0000000767b7ab00????? live???  org/apache/catalina/loader/WebappClassLoader@0x0000000762b712f8</h3>
+<h3>0x0000000767ae9360????? 52?????  659816? 0x0000000767ae93b0????? live???  sun/misc/Launcher$AppClassLoader@0x0000000762241680</h3>
+<h3>0x00000007673df848????? 0??????  0?????? 0x0000000767ae9360????? live???  java/util/ResourceBundle$RBClassLoader@0x0000000762498f90</h3>
+<h3>total = 37????? 8951???  55792808??????????? N/A???????? alive=8, dead=29??????????? N/A</h3>
+<h3>&nbsp;</h3>
+<h3><img src="tomcatClassloader\tomcat classloader_clip_image013.jpg" alt="7" width="553" height="60" border="0" /> </h3>
+<h3>Delegate  配置了， shared 目录配置了 </h3>
+<h3>computing per loader stat ..done.</h3>
+<h3>please wait.. computing  liveness..............done.</h3>
+<h3>class_loader??? classes bytes?? parent_loader?? alive??  type</h3>
+<h3>&lt;bootstrap&gt;???? 2482???  14861184????????? null????????? live??? &lt;internal&gt;</h3>
+<h3>0x0000000768da77d8????? 77?????  466376??? null????????? live???  sun/misc/Launcher$ExtClassLoader@0x00000007621eb958 --</h3>
+<h3>0x0000000768da7788????? 52?????  659816? 0x0000000768da77d8????? live???  sun/misc/Launcher$AppClassLoader@0x0000000762241680 --</h3>
+<h3>0x000000076892ffd0????? 0??????  0?????? 0x0000000768da7788????? live???  java/util/ResourceBundle$RBClassLoader@0x0000000762498f90</h3>
+<h3>0x0000000768da76e8????? 0??????  0?????? 0x0000000768da7738????? live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538 --</h3>
+<h3>0x0000000768da7738????? 556????  4709744 0x0000000768da7788?????  live???  org/apache/catalina/loader/StandardClassLoader@0x0000000762315538 --</h3>
+<h3>0x0000000768da7630????? 5200???  31904816???????  0x0000000768da76e8????? live???  org/apache/catalina/loader/WebappClassLoader@0x00000007628c7588 --</h3>
+<h3>total = 35????? 8395???  52687048??????????? N/A???????? alive=7, dead=28??????????? N/A</h3>
+<h3>&nbsp;</h3>
+<h3><img src="tomcatClassloader\tomcat classloader_clip_image015.jpg" alt="8" width="554" height="40" border="0" /> </h3>
+<p>&nbsp;</p>
+<p><strong>参考：</strong><strong> </strong><br />
+  1. <a href="http://tomcat.apache.org/tomcat-6.0-doc/config/loader.html">http://tomcat.apache.org/tomcat-6.0-doc/config/loader.html</a> ?The  Loader Component<br />
+  2. <a href="http://tomcat.apache.org/tomcat-7.0-doc/config/context.html">http://tomcat.apache.org/tomcat-7.0-doc/config/context.html</a>? The  Context Container<br />
+  3. <a href="http://agapple.iteye.com/blog/826661">http://agapple.iteye.com/blog/826661</a> ?<br />
+  主流web容器(jetty,tomcat,jboss)的classloader机制对比和相关问题分析 <br />
+  4. <a href="http://blog.csdn.net/fjslovejhl/article/details/21328347">http://blog.csdn.net/fjslovejhl/article/details/21328347</a>? Tomcat源码分析之ClassLoader部分的设计详细分析 tomcat8.0<br />
+  5. <a href="http://www.blogjava.net/heavensay/archive/2012/11/07/389685.html">http://www.blogjava.net/heavensay/archive/2012/11/07/389685.html</a>?  class卸载、热替换和Tomcat的热部署的分析 <br />
+  6. <a href="http://dncsoft.iteye.com/blog/336871">http://dncsoft.iteye.com/blog/336871</a>?  应用Tomcat的WebappClassLoader加载指定目录的jar文件 <br />
+  7. tomcat6.0和7.0的源代码 </p>
+<p>&nbsp;</p>
+<p>Btw： <strong>WatchedResource</strong> - The auto deployer will monitor the specified static resource of  the web application for updates, and will reload the web application if it is  updated. The content of this element must be a string.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
