@@ -1,40 +1,40 @@
-<html>
+﻿<html>
  <head>
  </head>
  <body>
- <p align="center"><strong><font size="15">����������JSF�����ṩ���߳�ģ��</font></strong></p>
- <p>JSF�Ǿ��������ܹ���ķ����м����Ʒ��ȫ����Jingdong Service Framework�����������ܷ򣩡�</p>
- <p>JSF����������netty�������ģ����ĴӴ������򵥽���һ��JSF����˵��߳�ģ�͡� </p>
- <p>1.JSF�ķ�����߳�ģ���������� boss�̳߳� + worker�̳߳� + ҵ���̳߳ء�boss�̳߳غ�worker�̳߳س�ΪReactor�̳߳ء�</p>
- <p> �����̳߳ظ��ԵĲ��������ͼ1��</p>
- <p>worker�̳߳غ�ҵ���̳߳�֮��Ĺ�ϵ�����ͼ2����ͼ�п��Կ���ҵ���̺߳�worker�߳��ǽ���ģ��������ҵ���̺߳�IO�̼߳�worker�߳̾ͷ����ˣ�ҵ���̺߳�I/O�̸߳��롣</p>
- <p><img src="jsf �߳�ģ��/jsf�߳�ģ��_����.bmp" alt="������߳�ģ��" width="900" height="600" /></p>
- <p> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ1 �����̳߳ظ��ԵĲ���</p>
- <p><img src="jsf �߳�ģ��/netty �߳�ģ��.png" alt="netty�߳�ģ��" width="602" height="347" /></p>
- <p> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ2 worker�̳߳غ�ҵ���̳߳ع�ϵ</p>
- <p>2. ͼ3��boss�̳߳أ� �߳���ΪMax(4,cpu/2)���û�����������</p>
- <p><img src="jsf �߳�ģ��/boss�̳߳�.JPG" alt="boss�̳߳�" width="1008" height="401" /></p>
- <p> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ3 boss�̳߳�</p>
- <p>3. ͼ4��worker�̳߳أ� �߳���ΪMax(8,cpu+1)���û���������</p>
- <p><img src="jsf �߳�ģ��/worker�̣߳�io�̣߳�.JPG" alt="worker�̳߳�" width="1005" height="379" /></p>
- <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ4 worker�̳߳�</p>
- <p>4.ͼ5��ͼ6��ҵ���̳߳صĹ�����cached�̳߳ش�С��20-200��Ĭ��queue�Ĵ�С��0�� ��������ֱ�ӷ����̣߳�ֱ���̳߳������ò���ִ���߳����쳣��</p>
- <p> ͼ7��һ������˿ڶ�Ӧһ��ҵ���̳߳ء�</p>
- <p><img src="jsf �߳�ģ��/ҵ���̳߳�-��ʼ��1.JPG" alt="ҵ���̳߳ع���1" width="1022" height="523" /></p>
- <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ5 ҵ���̳߳ع���1</p>
- <p><img src="jsf �߳�ģ��/ҵ���̳߳�-��ʼ��2.JPG" alt="ҵ���̳߳ع���2" width="1018" height="535" /></p>
- <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ6 ҵ���̳߳ع���2</p>
- <p><img src="jsf �߳�ģ��/ҵ���̳߳�-����.JPG" alt="ҵ���̺߳ͷ���˿ڵĹ�ϵ" width="1022" height="438" /></p>
- <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ7 ����˿ں�ҵ���̳߳صĹ�ϵ</p>
- <p>5.  ��ChannelPipeline��ServerHandler���ݷ���˵����û�ȡ��Ӧ��ҵ���̳߳أ�Ȼ����ServerHandler��handlerRequest���ύҵ������Ĭ�ϵ�������JSFTask��</p>
- <p> ����ʵ����ͼ8,9,10.</p>
- <p><img src="jsf �߳�ģ��/ҵ���̳߳�-��ȡ.JPG" alt="ҵ���̳߳ػ�ȡ" width="962" height="251" /></p>
- <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ8 ServerHandler�л�ȡҵ���̳߳�</p>
- <p><img src="jsf �߳�ģ��/�ύtask��ҵ���߳�.JPG" width="962" height="416" /></p>
- <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ9 ServerHandler���ύҵ������</p>
- <p><img src="jsf �߳�ģ��/ҵ���߳�ִ��task.JPG" width="576" height="242" /></p>
- <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ͼ10 �ύtask��ҵ���߳�Executor</p>
+ <p align="center"><strong><font size="15">京东服务框架JSF服务提供者线程模型</font></strong></p>
+ <p>JSF是京东基础架构组的服务化中间件产品，全名是Jingdong Service Framework（中文名：杰夫）。</p>
+ <p>JSF整体是依据netty来构建的，本文从代码层面简单介绍一下JSF服务端的线程模型。 </p>
+ <p>1.JSF的服务端线程模型整体上是 boss线程池 + worker线程池 + 业务线程池。boss线程池和worker线程池称为Reactor线程池。</p>
+ <p> 三类线程池各自的参数详见下图1。</p>
+ <p>worker线程池和业务线程池之间的关系详见下图2，在图中可以看到业务线程和worker线程是解耦的，请求放入业务线程后，IO线程即worker线程就返回了，业务线程和I/O线程隔离。</p>
+ <p><img src="jsf 线程模型/jsf线程模型_参数.bmp" alt="服务端线程模型" width="900" height="600" /></p>
+ <p> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图1 三类线程池各自的参数</p>
+ <p><img src="jsf 线程模型/netty 线程模型.png" alt="netty线程模型" width="602" height="347" /></p>
+ <p> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图2 worker线程池和业务线程池关系</p>
+ <p>2. 图3是boss线程池， 线程数为Max(4,cpu/2)，用户不可以配置</p>
+ <p><img src="jsf 线程模型/boss线程池.JPG" alt="boss线程池" width="1008" height="401" /></p>
+ <p> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图3 boss线程池</p>
+ <p>3. 图4是worker线程池， 线程数为Max(8,cpu+1)，用户可以配置</p>
+ <p><img src="jsf 线程模型/worker线程（io线程）.JPG" alt="worker线程池" width="1005" height="379" /></p>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图4 worker线程池</p>
+ <p>4.图5和图6是业务线程池的构建，cached线程池大小是20-200，默认queue的大小是0。 任务来了直接分配线程，直到线程池满，得不到执行线程抛异常。</p>
+ <p> 图7中一个服务端口对应一个业务线程池。</p>
+ <p><img src="jsf 线程模型/业务线程池-初始化1.JPG" alt="业务线程池构建1" width="1022" height="523" /></p>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图5 业务线程池构建1</p>
+ <p><img src="jsf 线程模型/业务线程池-初始化2.JPG" alt="业务线程池构建2" width="1018" height="535" /></p>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图6 业务线程池构建2</p>
+ <p><img src="jsf 线程模型/业务线程池-构建.JPG" alt="业务线程和服务端口的关系" width="1022" height="438" /></p>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图7 服务端口和业务线程池的关系</p>
+ <p>5.  在ChannelPipeline中ServerHandler根据服务端的配置获取对应的业务线程池，然后在ServerHandler的handlerRequest中提交业务任务，默认的任务是JSFTask。</p>
+ <p> 具体实现如图8,9,10.</p>
+ <p><img src="jsf 线程模型/业务线程池-获取.JPG" alt="业务线程池获取" width="962" height="251" /></p>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图8 ServerHandler中获取业务线程池</p>
+ <p><img src="jsf 线程模型/提交task到业务线程.JPG" width="962" height="416" /></p>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图9 ServerHandler中提交业务任务</p>
+ <p><img src="jsf 线程模型/业务线程执行task.JPG" width="576" height="242" /></p>
+ <p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 图10 提交task到业务线程Executor</p>
  <p>&nbsp;</p>
- <p>���Կ�����JSF�����ṩ���߳�ģ�����廹�ǰ���boss+worker+biz����netty�ٷ��Ƽ��ķ�ʽ�����ġ�</p>
+ <p>可以看到，JSF服务提供者线程模型整体还是按照boss+worker+biz这种netty官方推荐的方式构建的。</p>
  </body>
 </html>
