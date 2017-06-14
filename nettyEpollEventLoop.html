@@ -1,4 +1,4 @@
-<html>
+ï»¿<html>
 
 <head>
 <style type="text/css">
@@ -13,49 +13,49 @@
 
 <body>
 	<p align="center" class="STYLE1">        Netty EpollEventLoop    
-	<p>¾©¶«JSFÖĞµÄ·şÎñÌá¹©ÕßµÄserver¿ÉÒÔÊ¹ÓÃÁ½ÖÖEventLoop£¬ Ä¬ÈÏÎªfalse£¬ËùÒÔÊ¹ÓÃNioEventLoop£¬ÈçÏÂÍ¼ËùÊ¾¡£
-	<p>ÔÚNettyÖĞ, NioEventLoopÊ¹ÓÃJDK NioÖĞ»ùÓÚSelectorµÄIO¶àÂ·¸´ÓÃµÄ·½·¨¡£ÔÚÔçÆÚµÄJDK1.4ºÍ1.5 update10°æ±¾Ö®Ç°£¬Selector»ùÓÚselect/pollÄ£ĞÍÊµÏÖ£¬ÊÇ»ùÓÚIO¸´ÓÃ¼¼ÊõµÄ·Ç×èÈûIO£¬²»ÊÇÒì²½IO¡£ÔÚJDK1.5 update10ºÍlinux core2.6ÒÔÉÏ°æ±¾£¬sunÓÅ»¯ÁËSelctorµÄÊµÏÖ£¬µ×²ãÊ¹ÓÃepollÌæ»»ÁËselect/poll¡£ µ«ÊÇÔÚÉÏ²ãµÄJDK NioµÄapiÖĞ»¹ÊÇÑØÏ®ÁËselect£¨£©º¯ÊıµÄ½Ğ·¨£¬¶øJDK NioÔÚlinuxÖĞµ×²ãÆäÊµÓÃµÄÒ²ÊÇepollÄ£ĞÍ¡£ 
-	<p>Netty4.0.17 Ìá¹©ÁËÄ¬ÈÏ²ÉÓÃET¹¤×÷Ä£Ê½µÄEpollEventLoop¡£NioEventLoop±ÈEpollEventLoopÏà¶Ô¸üÍ¨ÓÃ£¬EpollEventLoopÖ»ÄÜÔÚlinuxÉÏÔËĞĞ£¬ÊôÓÚLinux native transport£¬ÊÇ²»ÄÜ¿ç²Ù×÷ÏµÍ³µÄ¡£EpollEventLoopÊ¹ÓÃÁËJNI£¬µ÷ÓÃÁËlinuxµÄepoll API¡£EpollEventLoopµÄAPIÒ²¾ÍÑØÏ®ÁËLinux epoll IO¶àÂ·¸´ÓÃÖĞAPIµÄ·ç¸ñºÍÃüÃû·½Ê½¡£Ïà¶ÔÓÚ»ùÓÚNIOµÄtransport£¬JNI transportÔÚÌØÊâÆ½Ì¨ÉÏÔö¼ÓÁËÌØ±ğµÄÌØĞÔ£¬»á²úÉú¸üÉÙµÄÄÚ´æÀ¬»ø£¬²¢ÇÒÒ²»áÌá¸ßĞÔÄÜ¡£
+	<p>äº¬ä¸œJSFä¸­çš„æœåŠ¡æä¾›è€…çš„serverå¯ä»¥ä½¿ç”¨ä¸¤ç§EventLoopï¼Œ é»˜è®¤ä¸ºfalseï¼Œæ‰€ä»¥ä½¿ç”¨NioEventLoopï¼Œå¦‚ä¸‹å›¾æ‰€ç¤ºã€‚
+	<p>åœ¨Nettyä¸­, NioEventLoopä½¿ç”¨JDK Nioä¸­åŸºäºSelectorçš„IOå¤šè·¯å¤ç”¨çš„æ–¹æ³•ã€‚åœ¨æ—©æœŸçš„JDK1.4å’Œ1.5 update10ç‰ˆæœ¬ä¹‹å‰ï¼ŒSelectoråŸºäºselect/pollæ¨¡å‹å®ç°ï¼Œæ˜¯åŸºäºIOå¤ç”¨æŠ€æœ¯çš„éé˜»å¡IOï¼Œä¸æ˜¯å¼‚æ­¥IOã€‚åœ¨JDK1.5 update10å’Œlinux core2.6ä»¥ä¸Šç‰ˆæœ¬ï¼Œsunä¼˜åŒ–äº†Selctorçš„å®ç°ï¼Œåº•å±‚ä½¿ç”¨epollæ›¿æ¢äº†select/pollã€‚ ä½†æ˜¯åœ¨ä¸Šå±‚çš„JDK Nioçš„apiä¸­è¿˜æ˜¯æ²¿è¢­äº†selectï¼ˆï¼‰å‡½æ•°çš„å«æ³•ï¼Œè€ŒJDK Nioåœ¨linuxä¸­åº•å±‚å…¶å®ç”¨çš„ä¹Ÿæ˜¯epollæ¨¡å‹ã€‚ 
+	<p>Netty4.0.17 æä¾›äº†é»˜è®¤é‡‡ç”¨ETå·¥ä½œæ¨¡å¼çš„EpollEventLoopã€‚NioEventLoopæ¯”EpollEventLoopç›¸å¯¹æ›´é€šç”¨ï¼ŒEpollEventLoopåªèƒ½åœ¨linuxä¸Šè¿è¡Œï¼Œå±äºLinux native transportï¼Œæ˜¯ä¸èƒ½è·¨æ“ä½œç³»ç»Ÿçš„ã€‚EpollEventLoopä½¿ç”¨äº†JNIï¼Œè°ƒç”¨äº†linuxçš„epoll APIã€‚EpollEventLoopçš„APIä¹Ÿå°±æ²¿è¢­äº†Linux epoll IOå¤šè·¯å¤ç”¨ä¸­APIçš„é£æ ¼å’Œå‘½åæ–¹å¼ã€‚ç›¸å¯¹äºåŸºäºNIOçš„transportï¼ŒJNI transportåœ¨ç‰¹æ®Šå¹³å°ä¸Šå¢åŠ äº†ç‰¹åˆ«çš„ç‰¹æ€§ï¼Œä¼šäº§ç”Ÿæ›´å°‘çš„å†…å­˜åƒåœ¾ï¼Œå¹¶ä¸”ä¹Ÿä¼šæé«˜æ€§èƒ½ã€‚
     <p><img src="nettyEpollEventLoop/twoType.JPG" width="816" height="146" />     
     <p>  
-    <p> <strong>epollÊ¹ÓÃÒ»×éº¯ÊıÀ´Íê³ÉÈÎÎñ£¬¶ø²»ÊÇÏñselect/pollÊ¹ÓÃµ¥¸öº¯Êı</strong>¡£
+    <p> <strong>epollä½¿ç”¨ä¸€ç»„å‡½æ•°æ¥å®Œæˆä»»åŠ¡ï¼Œè€Œä¸æ˜¯åƒselect/pollä½¿ç”¨å•ä¸ªå‡½æ•°</strong>ã€‚
     
-<p>1.epollÍ¨¹ıepoll_create´´½¨Ò»¸öÓÃÓÚepollÂÖÑ¯µÄÃèÊö·û£¬¶ÔÓ¦ÓÚÍ¼1ÖĞµÄ
-    epollFd¡£
+<p>1.epollé€šè¿‡epoll_createåˆ›å»ºä¸€ä¸ªç”¨äºepollè½®è¯¢çš„æè¿°ç¬¦ï¼Œå¯¹åº”äºå›¾1ä¸­çš„
+    epollFdã€‚
     
-    <p>epoll°ÑÓÃ»§¹ØĞÄµÄÎÄ¼şÃèÊö·ûÉÏµÄÊÂ¼ş·ÅÔÚÄÚºËÀïµÄÒ»¸öÊÂ¼ş±íÖĞ£¬´Ó¶øÎŞĞèÏñselectºÍpollÄÇÑùÃ¿´Îµ÷ÓÃ¶¼ÒªÖØ¸´´«ÈëÎÄ¼şµÄÊÂ¼ş·ÅÔÚÄÚºËÀïµÄÒ»¸öÊÂ¼ş±íÖĞ¡£µ«epollĞèÒªÊ¹ÓÃÒ»¸ö¶îÍâµÄÎÄ¼şÃèÊö·û£¬À´Î¨Ò»±êÊ¶ÄÚºËÖĞµÄÕâ¸öÊÂ¼ş±í£»Õâ¸öÎÄ¼şÃèÊö·û¾ÍÊÇÍ¼1ÖĞµÄeventFd¡£    
-    <p>Native.epollCtlAdd°ÑepollFdºÍ
-eventFd×öÁË¹ØÁª¡£epollÓëselect/poll²»Í¬£¬<strong>epoll²»ÓÃÃ¿´Îµ÷ÓÃ¶¼ÏòÄÚºË¿½±´ÊÂ¼şÃèÊöĞÅÏ¢</strong>£¬ÔÚµÚÒ»´Îµ÷ÓÃºó£¬ÊÂ¼şĞÅÏ¢¾Í»áÓë¶ÔÓ¦µÄepollÃèÊö·û¹ØÁªÆğÀ´¡£
+    <p>epollæŠŠç”¨æˆ·å…³å¿ƒçš„æ–‡ä»¶æè¿°ç¬¦ä¸Šçš„äº‹ä»¶æ”¾åœ¨å†…æ ¸é‡Œçš„ä¸€ä¸ªäº‹ä»¶è¡¨ä¸­ï¼Œä»è€Œæ— éœ€åƒselectå’Œpollé‚£æ ·æ¯æ¬¡è°ƒç”¨éƒ½è¦é‡å¤ä¼ å…¥æ–‡ä»¶çš„äº‹ä»¶æ”¾åœ¨å†…æ ¸é‡Œçš„ä¸€ä¸ªäº‹ä»¶è¡¨ä¸­ã€‚ä½†epolléœ€è¦ä½¿ç”¨ä¸€ä¸ªé¢å¤–çš„æ–‡ä»¶æè¿°ç¬¦ï¼Œæ¥å”¯ä¸€æ ‡è¯†å†…æ ¸ä¸­çš„è¿™ä¸ªäº‹ä»¶è¡¨ï¼›è¿™ä¸ªæ–‡ä»¶æè¿°ç¬¦å°±æ˜¯å›¾1ä¸­çš„eventFdã€‚    
+    <p>Native.epollCtlAddæŠŠepollFdå’Œ
+eventFdåšäº†å…³è”ã€‚epollä¸select/pollä¸åŒï¼Œ<strong>epollä¸ç”¨æ¯æ¬¡è°ƒç”¨éƒ½å‘å†…æ ¸æ‹·è´äº‹ä»¶æè¿°ä¿¡æ¯</strong>ï¼Œåœ¨ç¬¬ä¸€æ¬¡è°ƒç”¨åï¼Œäº‹ä»¶ä¿¡æ¯å°±ä¼šä¸å¯¹åº”çš„epollæè¿°ç¬¦å…³è”èµ·æ¥ã€‚
 <p><img src="nettyEpollEventLoop/epoll_function1.JPG" width="826" height="213" />   
-<p>   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Í¼1 EpollEventLoop³õÊ¼»¯epoll
-<p>2. epollÍ¨¹ıepoll_ctlÌí¼Ó/ĞŞ¸Ä/É¾³ıÊÂ¼ş£¬ÀàËÆÓÚObserverÄ£Ê½µÄÊÂ¼ş×¢²á¡£
+<p>   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  å›¾1 EpollEventLoopåˆå§‹åŒ–epoll
+<p>2. epollé€šè¿‡epoll_ctlæ·»åŠ /ä¿®æ”¹/åˆ é™¤äº‹ä»¶ï¼Œç±»ä¼¼äºObserveræ¨¡å¼çš„äº‹ä»¶æ³¨å†Œã€‚
 <p><img src="nettyEpollEventLoop/epoll_functionAdd.JPG" width="832" height="156" />
-<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Í¼2 epollFdÖĞÌí¼ÓÊÂ¼ş
+<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp å›¾2 epollFdä¸­æ·»åŠ äº‹ä»¶
 <p><img src="nettyEpollEventLoop/epoll_functionModify.JPG" width="811" height="119" />
-<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Í¼3
-epollFdÖĞĞŞ¸ÄÊÂ¼ş
+<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp å›¾3
+epollFdä¸­ä¿®æ”¹äº‹ä»¶
 <p><img src="nettyEpollEventLoop/epoll_functionDelete.JPG" width="816" height="244" />
-<p>	 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Í¼4
-epollFdÖĞÉ¾³ıÊÂ¼ş
-<p>3. epollÊ¹ÓÃ¡°ÊÂ¼ş¡±µÄ¾ÍĞ÷Í¨Öª·½Ê½£¬Í¨¹ıÔÚµÈ´ıµÄÃèÊö·ûÉÏ×¢²á»Øµ÷º¯Êı£¨epoll_ctl×¢²áfd£©£¬µ±ÊÂ¼ş·¢Éú£¨ÊÂ¼şfd¾ÍĞ÷£©Ê±£¬»Øµ÷º¯Êı¸ºÔğ°Ñ·¢ÉúµÄÊÂ¼ş´æ´¢ÔÚ¾ÍĞ÷ÊÂ¼şÁ´±íÖĞ£¬×îºóĞ´µ½ÓÃ»§¿Õ¼ä£¬ epoll_wait±ã¿ÉÒÔÊÕµ½Í¨Öª¡£
-ÏÂÍ¼ÊÇ´¦Àí¾ÍĞ÷ÊÂ¼şµÄÁ÷³Ì¡£
+<p>	 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp å›¾4
+epollFdä¸­åˆ é™¤äº‹ä»¶
+<p>3. epollä½¿ç”¨â€œäº‹ä»¶â€çš„å°±ç»ªé€šçŸ¥æ–¹å¼ï¼Œé€šè¿‡åœ¨ç­‰å¾…çš„æè¿°ç¬¦ä¸Šæ³¨å†Œå›è°ƒå‡½æ•°ï¼ˆepoll_ctlæ³¨å†Œfdï¼‰ï¼Œå½“äº‹ä»¶å‘ç”Ÿï¼ˆäº‹ä»¶fdå°±ç»ªï¼‰æ—¶ï¼Œå›è°ƒå‡½æ•°è´Ÿè´£æŠŠå‘ç”Ÿçš„äº‹ä»¶å­˜å‚¨åœ¨å°±ç»ªäº‹ä»¶é“¾è¡¨ä¸­ï¼Œæœ€åå†™åˆ°ç”¨æˆ·ç©ºé—´ï¼Œ epoll_waitä¾¿å¯ä»¥æ”¶åˆ°é€šçŸ¥ã€‚
+ä¸‹å›¾æ˜¯å¤„ç†å°±ç»ªäº‹ä»¶çš„æµç¨‹ã€‚
 <p><img src="nettyEpollEventLoop/epoll_functionWait.JPG" width="794" height="217">
-<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Í¼5
-Ñ­»·×èÈûµ÷ÓÃepollWait·½·¨£¬µÈ´ı¾ÍĞ÷µÄÊÂ¼ş
+<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp å›¾5
+å¾ªç¯é˜»å¡è°ƒç”¨epollWaitæ–¹æ³•ï¼Œç­‰å¾…å°±ç»ªçš„äº‹ä»¶
 <p><img src="nettyEpollEventLoop/epoll_function_wait.JPG" width="818" height="306">
-<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Í¼6 epollwaitÊÕµ½Í¨Öªºó·µ»ØepollFd¶ÔÓ¦µÄÒÑ¾­¾ÍĞ÷µÄÊÂ¼şid£¬Ò²¾ÍÊÇready±äÁ¿
+<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp å›¾6 epollwaitæ”¶åˆ°é€šçŸ¥åè¿”å›epollFdå¯¹åº”çš„å·²ç»å°±ç»ªçš„äº‹ä»¶idï¼Œä¹Ÿå°±æ˜¯readyå˜é‡
 <p>
-<p><img src="nettyEpollEventLoop/epoll_function_´¦Àí¾ÍĞ÷ÊÂ¼ş.JPG" width="721" height="143">
-<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Í¼7 ¸ù¾İÊÂ¼şid£¬µ÷ÓÃ¾ÍĞ÷´¦ÀíÊÂ¼ş·½·¨
-<p><img src="nettyEpollEventLoop/epoll_function_´¦Àí¾ÍĞ÷ÊÂ¼ş1.JPG" width="805" height="133">
-<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Í¼8 Ïû·ÑÒÑ¾­¾ÍĞ÷µÄÊÂ¼ş
-<p>×Ü½á£ºepoll»ùÓÚCQRSµÄÀíÄî£¬·ÖÀëÁËcommand£¨epollCtl£©ºÍqueuy£¨epollWait£©¡£epollÔÚĞÔÄÜÉÏÒ²±Èselect/poll¸ß³öºÜ¶à¡£epoll²»ĞèÒªÒ»Ö±ÂÖÑ¯£¬½ÚÊ¡ÁËcpuÊ±¼ä¡£
-<p>ÔÚ¸´ÖÆÎÊÌâÉÏ£¬epollÊ¹ÓÃmmap¼õÉÙ¸´ÖÆ¿ªÏú¡£
+<p><img src="nettyEpollEventLoop/epoll_function_å¤„ç†å°±ç»ªäº‹ä»¶.JPG" width="721" height="143">
+<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp å›¾7 æ ¹æ®äº‹ä»¶idï¼Œè°ƒç”¨å°±ç»ªå¤„ç†äº‹ä»¶æ–¹æ³•
+<p><img src="nettyEpollEventLoop/epoll_function_å¤„ç†å°±ç»ªäº‹ä»¶1.JPG" width="805" height="133">
+<p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp å›¾8 æ¶ˆè´¹å·²ç»å°±ç»ªçš„äº‹ä»¶
+<p>æ€»ç»“ï¼šepollåŸºäºCQRSçš„ç†å¿µï¼Œåˆ†ç¦»äº†commandï¼ˆepollCtlï¼‰å’Œqueuyï¼ˆepollWaitï¼‰ã€‚epollåœ¨æ€§èƒ½ä¸Šä¹Ÿæ¯”select/pollé«˜å‡ºå¾ˆå¤šã€‚epollä¸éœ€è¦ä¸€ç›´è½®è¯¢ï¼ŒèŠ‚çœäº†cpuæ—¶é—´ã€‚
+<p>åœ¨å¤åˆ¶é—®é¢˜ä¸Šï¼Œepollä½¿ç”¨mmapå‡å°‘å¤åˆ¶å¼€é”€ã€‚
 <p>
-<p> ²Î¿¼ÎÄÏ×£º
+<p> å‚è€ƒæ–‡çŒ®ï¼š
 <p>1.https://github.com/netty/netty/wiki/Native-transports 
         Netty    
-<p>2.netty-all-4.0.33.Final Ô´´úÂë 
+<p>2.netty-all-4.0.33.Final æºä»£ç  
 EpollEventLoop
 <p>3.http://blog.csdn.net/turkeyzhou/article/details/8504554
 <p>4.http://www.cnblogs.com/wiessharling/p/4106295.html
