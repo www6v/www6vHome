@@ -52,7 +52,7 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>end</strong>(bytesRead &gt; 0); <br />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br />
   } </p>
-<p>2. in.read前执行begin()，此时创建Interruptible 的interruptor &nbsp;对象。 <br />
+<p>2. in.read前执行begin()，此时创建中断触发器Interruptible的对象interruptor。 <br />
   interruptor = new <strong>Interruptible</strong>() { <br />
 &nbsp; &nbsp; public void interrupt() { <br />
 &nbsp; &nbsp; &nbsp;  synchronized (closeLock) { <br />
@@ -61,7 +61,7 @@
 &nbsp; &nbsp; &nbsp; &nbsp; interrupted = true; <br />
 &nbsp; &nbsp; &nbsp; &nbsp; open = false; <br />
 &nbsp; &nbsp; &nbsp; &nbsp; try { <br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; AbstractInterruptibleChannel.this.implCloseChannel(); // 关掉ChanelSocket <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; AbstractInterruptibleChannel.this.implCloseChannel(); // 回调AbstractInterruptibleChannel的方法 来关闭  Channel。<br />
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch (IOException x) { } <br />
 &nbsp; &nbsp; &nbsp; }<br />
 &nbsp; &nbsp; }<br />
@@ -90,4 +90,10 @@
   &nbsp;&nbsp; <strong>if</strong> (interrupted) <strong>throw</strong> <strong>new</strong> ClosedByInterruptException(); <br />
   &nbsp;&nbsp; <strong>if</strong> (!open) <strong>throw</strong> <strong>new</strong> AsynchronousCloseException(); <br />
   } </p>
-<p>&nbsp;</p>
+<p>整体过程是： <br />
+  1.线程执行begin方法，植入中断触发器interruptor，然后可能在channel上阻塞； <br />
+  2.另外一个线程调用步骤1线程的interrupt方法； <br />
+  3.interrupt方法会执行channel的close方法，并设置标志位interrupted = true； <br />
+4.线程进入end方法，清空线程的中断触发器，当判断interrupted = true时，抛出ClosedByInterruptException。</p>
+
+注：文中代码在java.nio.channels.spi.AbstractInterruptibleChannel中。
