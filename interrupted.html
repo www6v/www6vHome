@@ -1,0 +1,93 @@
+﻿<style type="text/css">
+<!--
+.STYLE1 {
+	font-size: x-large;
+	font-weight: bold;
+}
+-->
+</style>
+<p align="center" class="STYLE1">关于任务取消相关异常的排查</p>
+<p>&nbsp;</p>
+<p><strong>背景：</strong></p>
+<p>最近有些应用中会时不时的抛出如下异常： </p>
+<table border="0" cellspacing="3" cellpadding="0">
+  <tr>
+    <td></td>
+    <td><p align="left">++++    exception thrown while trying to get object from cache for key: key值;    host:10.4.37.175:11241 -- null<br />
+      java.nio.channels.ClosedByInterruptException<br />
+      at    java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:184)<br />
+      at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:272)<br />
+      at sun.nio.ch.SocketAdaptor$SocketInputStream.read(SocketAdaptor.java:195)<br />
+      at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:86)<br />
+      at java.io.BufferedInputStream.fill(BufferedInputStream.java:218)<br />
+      at java.io.BufferedInputStream.read1(BufferedInputStream.java:258)<br />
+      at java.io.BufferedInputStream.read(BufferedInputStream.java:317)<br />
+      at java.io.DataInputStream.read(DataInputStream.java:132)<br />
+      at    com.ycache.danga.MemCached.SockIOPool$SockIO.readLine(SockIOPool.java:2023) </p></td>
+  </tr>
+</table>
+<p><img width="404" height="496" src="interrupt/interrupted_clip_image001.png" /></p>
+<p><strong>异常原因：</strong> <br />
+<strong>调用方使用了 Thread.interrupt 方法 或者 Future.cancel方法。</strong> </p>
+<p><br />
+    <strong>解决办法：</strong> <br />
+  <strong>在调用ycache的线程中</strong><strong>，去掉</strong><strong>Future.cancel</strong><strong> </strong><strong>或者 Thread.interrupt </strong><strong>方法</strong><strong>使用</strong>。</p>
+<table border="0" cellspacing="0" cellpadding="0" align="left">
+  <tr>
+    <td width="0"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><p align="left"><img width="1751" height="2" src="interrupt/interrupted_clip_image002.png" /></p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p><strong>调用过程分析：</strong> </p>
+<p>1. 当调用方使用ycache的MemCachedClient.get方法时，就会调用SocketChannelImpl.read 方法，在读操作前运行 begin方法，读操作后使用 end方法 </p>
+<p align="left"><strong>public</strong> <strong>int</strong> read(ByteBuffer dst) <strong>throws</strong> IOException { <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;try { <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>begin</strong>(); <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bytesRead = in.read(buf, 0,  bytesToRead); <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} finally { <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>end</strong>(bytesRead &gt; 0); <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br />
+  } </p>
+<p>2. in.read前执行begin()，此时创建Interruptible 的interruptor &nbsp;对象。 <br />
+  interruptor = new <strong>Interruptible</strong>() { <br />
+&nbsp; &nbsp; public void interrupt() { <br />
+&nbsp; &nbsp; &nbsp;  synchronized (closeLock) { <br />
+&nbsp; &nbsp; &nbsp; &nbsp; if (!open) <br />
+&nbsp; &nbsp; &nbsp; &nbsp; return; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; interrupted = true; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; open = false; <br />
+&nbsp; &nbsp; &nbsp; &nbsp; try { <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; AbstractInterruptibleChannel.this.implCloseChannel(); // 关掉ChanelSocket <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch (IOException x) { } <br />
+&nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; }<br />
+}  <br />
+&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp; <br />
+  3. 当 in.read 在执行且尚未执行完，此时调用方代码 执行了Thread.interrupt 或者 Future.cancel 时，就会调用当前线程interruptor的interrupt方法， <br />
+  将interrupted 设置为<strong>true</strong><strong>，同时关掉</strong><strong>socket</strong> </p>
+<p align="left"><strong>public</strong> <strong>void</strong> interrupt() { <br />
+  &nbsp;&nbsp; <strong>if</strong> (<strong>this</strong> !=  Thread.currentThread()) <br />
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; checkAccess(); </p>
+<p align="left">&nbsp;&nbsp; <strong>synchronized</strong> (blockerLock) { <br />
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Interruptible b = blocker; <br />
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <strong>if</strong> (b != <strong>null</strong>) { <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; interrupt0();&nbsp;&nbsp;&nbsp; // Just  to set the interrupt flag <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b.interrupt(); <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>return</strong>; <br />
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; } <br />
+  &nbsp;&nbsp; } <br />
+  &nbsp;&nbsp; interrupt0(); <br />
+  } </p>
+<p>4. in.read后执行end(true)，当没有读取到数据或者读取超时时，就会发生ClosedByInterruptException，代码如下 <br />
+    <strong>protected</strong> <strong>final</strong> <strong>void</strong> end(<strong>boolean</strong> completed) <br />
+  &nbsp;&nbsp; <strong>throws</strong> AsynchronousCloseException <br />
+  &nbsp;&nbsp;&nbsp; { <br />
+  &nbsp;&nbsp; <em>blockedOn</em>(<strong>null</strong>); <br />
+  &nbsp;&nbsp; <strong>if</strong> (interrupted) <strong>throw</strong> <strong>new</strong> ClosedByInterruptException(); <br />
+  &nbsp;&nbsp; <strong>if</strong> (!open) <strong>throw</strong> <strong>new</strong> AsynchronousCloseException(); <br />
+  } </p>
+<p>&nbsp;</p>
