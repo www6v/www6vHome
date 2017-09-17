@@ -2910,41 +2910,6 @@
 									"subViews": [
 										{
 											"_type": "EdgeLabelView",
-											"_id": "AAAAAAFej1e3/IHN5es=",
-											"_parent": {
-												"$ref": "AAAAAAFeevl3ddj9bG0="
-											},
-											"model": {
-												"$ref": "AAAAAAFeevl3ddj8zYM="
-											},
-											"visible": true,
-											"enabled": true,
-											"lineColor": "#000000",
-											"fillColor": "#ffffff",
-											"fontColor": "#000000",
-											"font": "Arial;13;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 610,
-											"top": 571,
-											"width": 130.08251953125,
-											"height": 13,
-											"autoResize": false,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
-											"hostEdge": {
-												"$ref": "AAAAAAFeevl3ddj9bG0="
-											},
-											"edgePosition": 1,
-											"underline": false,
-											"text": "13 : doReadMessages",
-											"horizontalAlignment": 2,
-											"verticalAlignment": 5,
-											"wordWrap": false
-										},
-										{
-											"_type": "EdgeLabelView",
 											"_id": "AAAAAAFeevl3ddj/95U=",
 											"_parent": {
 												"$ref": "AAAAAAFeevl3ddj9bG0="
@@ -3053,9 +3018,6 @@
 									},
 									"lineStyle": 0,
 									"points": "636:568;666:568;666:588;643:588",
-									"nameLabel": {
-										"$ref": "AAAAAAFej1e3/IHN5es="
-									},
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFeevl3ddj/95U="
 									},
@@ -3824,41 +3786,6 @@
 									"subViews": [
 										{
 											"_type": "EdgeLabelView",
-											"_id": "AAAAAAFej1e4AIIJc/U=",
-											"_parent": {
-												"$ref": "AAAAAAFehEhtIEMWTS0="
-											},
-											"model": {
-												"$ref": "AAAAAAFehEhtH0MVQXU="
-											},
-											"visible": true,
-											"enabled": true,
-											"lineColor": "#000000",
-											"fillColor": "#ffffff",
-											"fontColor": "#000000",
-											"font": "Arial;13;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 774,
-											"top": 611,
-											"width": 130.08251953125,
-											"height": 13,
-											"autoResize": false,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
-											"hostEdge": {
-												"$ref": "AAAAAAFehEhtIEMWTS0="
-											},
-											"edgePosition": 1,
-											"underline": false,
-											"text": "15 : doReadMessages",
-											"horizontalAlignment": 2,
-											"verticalAlignment": 5,
-											"wordWrap": false
-										},
-										{
-											"_type": "EdgeLabelView",
 											"_id": "AAAAAAFehEhtIEMYeLE=",
 											"_parent": {
 												"$ref": "AAAAAAFehEhtIEMWTS0="
@@ -3967,9 +3894,6 @@
 									},
 									"lineStyle": 0,
 									"points": "800:608;830:608;830:628;806:628",
-									"nameLabel": {
-										"$ref": "AAAAAAFej1e4AIIJc/U="
-									},
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFehEhtIEMYeLE="
 									},
